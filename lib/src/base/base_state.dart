@@ -16,7 +16,7 @@ import 'package:flutter_futrue/src/helper/loading_helper.dart';
  */
 
 ///
-enum DataState { normal, noData, noNetwork }
+enum DataState { normal, noData, noNetwork, catched }
 
 abstract class BaseState<T extends StatefulWidget> extends State<T>
     implements IBaseView {
@@ -65,7 +65,7 @@ abstract class BaseState<T extends StatefulWidget> extends State<T>
           builder: (BuildContext context, LoadStatus mode) {
             Widget body;
             if (mode == LoadStatus.idle) {
-              body = Text("加载更多");
+              body = Text("");
             } else if (mode == LoadStatus.loading) {
               body = CupertinoActivityIndicator();
             } else if (mode == LoadStatus.failed) {
@@ -146,6 +146,40 @@ abstract class BaseState<T extends StatefulWidget> extends State<T>
     );
   }
 
+  void dataHelper({DataState type,  isLoad = false}) {
+    if (isLoad) {
+      loadHelper(type);
+    }else{
+      refreshHelper(type);
+    }
+  }
+
+  void refreshHelper(DataState type) {
+    state = type;
+    refreshController.loadComplete();
+    if (type == DataState.normal) {
+      refreshController.refreshCompleted();
+    } else if (type == DataState.noData) {
+      refreshController.refreshFailed();
+    } else if (type == DataState.noNetwork) {
+      refreshController.refreshFailed();
+    } else if (type == DataState.catched) {
+      refreshController.refreshFailed();
+    }
+    setState(() {});
+  }
+
+  void loadHelper(DataState type) {
+    if (type == DataState.normal) {
+      refreshController.loadComplete();
+    } else if (type == DataState.noData) {
+      refreshController.loadNoData();
+    } else if (type == DataState.noNetwork) {
+      refreshController.loadFailed();
+    }
+    setState(() {});
+  }
+
   Future<dynamic> refresh() async {
     isLoadMore = true;
     state = DataState.normal;
@@ -208,7 +242,7 @@ abstract class BaseState<T extends StatefulWidget> extends State<T>
     }
   }
 
-  void useNetData(Object data);
+  void useNetData(Object data) {}
 
   Future<dynamic> onRefresh() async {}
 

@@ -5,6 +5,7 @@ import 'package:flutter_futrue_example/page/simple_page/simple_page1.dart';
 import 'package:flutter_futrue_example/page/simple_page/simple_page10.dart';
 import 'package:flutter_futrue_example/page/simple_page/simple_page11.dart';
 import 'package:flutter_futrue_example/page/simple_page/simple_page12.dart';
+import 'package:flutter_futrue_example/page/simple_page/simple_page13.dart';
 import 'package:flutter_futrue_example/page/simple_page/simple_page2.dart';
 import 'package:flutter_futrue_example/page/simple_page/simple_page3.dart';
 import 'package:flutter_futrue_example/page/simple_page/simple_page4.dart';
@@ -25,6 +26,7 @@ class _HomePageState extends State<HomePage> {
 
   List<String> dataList = [];
   Map<String, Widget> pageMap = {
+    'gank API': new SimplePage13(),
     '假数据-自定义的 baseState': new SimplePage1(),
     '真实数据-默认UI框架 baseState': new SimplePage2(),
     '自定义转圈+随机数据获取': new SimplePage3(),

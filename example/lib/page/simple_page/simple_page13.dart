@@ -3,21 +3,37 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_futrue/flutter_futrue.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter_futrue_example/page/simple_page/simple_page13.dart';
 
-class BarPage2 extends StatefulWidget {
+class SimplePage13 extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return new _BarPage2State();
+    return new _SimplePage13State();
   }
 }
 
-class _BarPage2State extends BaseState<BarPage2> {
+class _SimplePage13State extends BaseState<SimplePage13> {
+  @override
+  String appBarTitle() {
+    return '假数据示范';
+  }
 
+  @override
+  List<Widget> buildAppBarActions() {
+    return [
+      IconButton(
+        icon: Icon(Icons.refresh), onPressed: () {
+        showLoading();
+        Future.delayed(const Duration(milliseconds: 1000)).then((val) {
+          refresh();
+        });
+      },),
+    ];
+  }
 
   @override
   buildBody() {
     return GridView.builder(
+
       padding: EdgeInsets.only(top: 2.0, left: 2.0, right: 2.0),
       itemCount: modelList.length,
       itemBuilder: (context, i) {
@@ -107,4 +123,44 @@ class _BarPage2State extends BaseState<BarPage2> {
     // 假数据用不到该方法
   }
 
+}
+
+class GanHuo extends Object {
+  String createdAt;
+  String desc;
+  String type;
+  String url;
+  String publishedAt;
+  List<String> images;
+  String who;
+  String source;
+  bool used;
+
+  GanHuo(this.createdAt, this.desc, this.type, this.url,
+      this.publishedAt, this.images, this.who, this.source, this.used);
+
+  GanHuo.fromJson(Map<String, dynamic> json) {
+    createdAt = json['createdAt'];
+    desc = json['desc'];
+    type = json['type'];
+    url = json['url'];
+    publishedAt = json['publishedAt'];
+    images = json['images'];
+    who = json['who'];
+    source = json['source'];
+    used = json['used'];
+  }
+}
+
+
+class CommBean extends Object {
+  bool error;
+  Object results;
+
+  CommBean(this.error, this.results);
+
+  CommBean.fromJson(Map<String, dynamic> json) {
+    error = json['error'];
+    results = json['results'];
+  }
 }
