@@ -1,3 +1,7 @@
+## 1.0.4
+* Add more extension methods for processing data
+* Adapt to Androidx
+
 ## 1.0.3
 * Add pull-down refresh switch
 * Optimize when no more loads are loaded
