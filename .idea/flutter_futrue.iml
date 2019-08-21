@@ -64,6 +64,7 @@
       <excludeFolder url="file://$MODULE_DIR$/example/lib/my_error/packages" />
       <excludeFolder url="file://$MODULE_DIR$/example/lib/packages" />
       <excludeFolder url="file://$MODULE_DIR$/example/lib/page/bat_page/packages" />
+      <excludeFolder url="file://$MODULE_DIR$/example/lib/page/other/packages" />
       <excludeFolder url="file://$MODULE_DIR$/example/lib/page/packages" />
       <excludeFolder url="file://$MODULE_DIR$/example/lib/page/simple_page/packages" />
       <excludeFolder url="file://$MODULE_DIR$/example/lib/util/packages" />
