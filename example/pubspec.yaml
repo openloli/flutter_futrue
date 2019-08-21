@@ -1,0 +1,26 @@
+name: flutter_futrue_example
+description: Demonstrates how to use the flutter_futrue plugin.
+publish_to: 'none'
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  ######
+  cupertino_icons: ^0.1.2
+  dio: ^2.1.13
+  cached_network_image: ^0.8.0
+  flutter_downloader: ^1.0.5
+  ######
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_futrue:
+    path: ../
+
+flutter:
+
+  uses-material-design: true
