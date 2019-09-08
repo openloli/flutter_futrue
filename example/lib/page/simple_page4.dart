@@ -1,14 +1,15 @@
-import 'package:flutter/material.dart'
-    hide RefreshIndicator, RefreshIndicatorState;
-import 'package:flutter/scheduler.dart';
+//import 'package:flutter/material.dart'
+//    hide RefreshIndicator, RefreshIndicatorState;
+//import 'package:flutter/scheduler.dart';
 //import 'package:flutter_futrue_example/base_state.dart';
-import 'package:flutter_futrue_example/my/my_pro/my_proqress_view2.dart';
+//import 'package:flutter_futrue_example/my/my_pro/my_proqress_view2.dart';
 import 'package:flutter_futrue_example/net/bean/simple_bean.dart';
 import 'package:flutter_futrue_example/net/net.dart';
 import 'package:flutter_futrue_example/page/simple_page1_temp.dart';
+//import 'package:flutter_futrue_example/util/comm_widgets.dart';
 //import 'package:flutter_futrue_example/util/dialog_comm.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:connectivity/connectivity.dart';
+//import 'package:pull_to_refresh/pull_to_refresh.dart';
+//import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -18,13 +19,13 @@ import 'dart:math';
 import 'package:flutter_futrue/flutter_futrue.dart';
 
 ///
-class BarPage3 extends StatefulWidget {
+class SimplePage4 extends StatefulWidget {
   @override
-  _BarPage3State createState() => _BarPage3State();
+  _SimplePage4State createState() => _SimplePage4State();
 }
 
-class _BarPage3State extends BaseState<BarPage3>
-    with AutomaticKeepAliveClientMixin, SingleTickerProviderStateMixin {
+class _SimplePage4State extends BaseState<SimplePage4>
+    with SingleTickerProviderStateMixin {
   var API_date10 = "http://www.mocky.io/v2/5d25615d2f00006400c10754"; //  十条数据
   var API_date3 = "http://www.mocky.io/v2/5d25892f2f00009136c10841"; // 三条数据
   var API_date0 = "http://www.mocky.io/v2/5d2596052f00000a35c108c7"; //数据为空
@@ -47,10 +48,32 @@ class _BarPage3State extends BaseState<BarPage3>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: bodyWidget(
+        appBar: AppBar(
+          title: Text('固定+复杂头布局'),
+          actions: <Widget>[
+            appBarMenuText(
+                title: '手刷',
+                onPressed: () {
+                  callInitLoading();
+                  onRefresh();
+                }),
+            appBarMenuText(
+                title: '去页面-返刷新',
+                onPressed: () {
+                  RouteHelper.pushResultWidget(context, new SimplePage1Temp())
+                      .then((result) {
+                    print('result = ${result.toString()}');
+                    callInitLoading();
+                    onRefresh();
+                  });
+                }),
+          ],
+        ),
+        body: bodyHeadWidget(
           modelList: modelList,
           onRefresh: onRefresh,
-//          onLoading: onLoading,
+          onLoading: onLoading,
+          headBody: head(),
           contentBody: body(),
         ));
   }
@@ -65,7 +88,7 @@ class _BarPage3State extends BaseState<BarPage3>
         ),
         dataCallback: (Object bean) {
           List<dynamic> temp = bean;
-//          temp.length >= 10 ? isLoading = true : isLoading = false;
+          temp.length >= 10 ? isLoading = true : isLoading = false;
           temp.forEach((v) {
             modelList.add(new SimpleDataBean.fromJson(v));
           });
@@ -85,8 +108,8 @@ class _BarPage3State extends BaseState<BarPage3>
         ),
         dataCallback: (bean) {
           List<dynamic> temp = bean;
-//          temp.length >= 10 ? isLoading = true : isLoading = false;
-          callLoadingCheck(temp.length);
+          temp.length >= 10 ? isLoading = true : isLoading = false;
+//          callLoadingCheck(temp.length);
           temp.forEach((v) {
             modelList.add(new SimpleDataBean.fromJson(v));
           });
@@ -97,8 +120,18 @@ class _BarPage3State extends BaseState<BarPage3>
         });
   }
 
+  head() {
+    return Container(
+      height: 180.0,
+      alignment: Alignment.center,
+      color: Colors.blue,
+      child: Text('我是头布局'),
+    );
+  }
+
   Widget body() {
     return ListView.builder(
+      physics: ClampingScrollPhysics(),
       itemCount: modelList.length,
       itemBuilder: (BuildContext context, int index) {
         return Container(
@@ -112,20 +145,17 @@ class _BarPage3State extends BaseState<BarPage3>
 
   ///模拟获取数据时的各种情况
   randomPath(who) {
-    var random = Random().nextInt(5);
+    var random = Random().nextInt(6);
     print('$who，random = ${random} (0、4模拟10条、1模拟3条、2模拟0条、3模拟登录失效)');
-    if (random == 0 || random == 4) {
+    if (random == 0 || random == 4 || random == 5 || random == 3) {
       return API_date10;
     } else if (random == 1) {
       return API_date3;
     } else if (random == 2) {
       return API_date0;
-    } else if (random == 3) {
-      return API_date900;
-    } //临时
+    }
+//    else if (random == 3) {
+//      return API_date900;
+//    } //临时
   }
-
-  @override
-  // TODO: implement wantKeepAlive
-  bool get wantKeepAlive => true;
 }

@@ -18,13 +18,13 @@ import 'dart:math';
 import 'package:flutter_futrue/flutter_futrue.dart';
 
 ///
-class BarPage3 extends StatefulWidget {
+class BarPage6 extends StatefulWidget {
   @override
-  _BarPage3State createState() => _BarPage3State();
+  _BarPage6State createState() => _BarPage6State();
 }
 
-class _BarPage3State extends BaseState<BarPage3>
-    with AutomaticKeepAliveClientMixin, SingleTickerProviderStateMixin {
+class _BarPage6State extends BaseState<BarPage6>
+    with  SingleTickerProviderStateMixin {
   var API_date10 = "http://www.mocky.io/v2/5d25615d2f00006400c10754"; //  十条数据
   var API_date3 = "http://www.mocky.io/v2/5d25892f2f00009136c10841"; // 三条数据
   var API_date0 = "http://www.mocky.io/v2/5d2596052f00000a35c108c7"; //数据为空
@@ -125,7 +125,5 @@ class _BarPage3State extends BaseState<BarPage3>
     } //临时
   }
 
-  @override
-  // TODO: implement wantKeepAlive
-  bool get wantKeepAlive => true;
+
 }

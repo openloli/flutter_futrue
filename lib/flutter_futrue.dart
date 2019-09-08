@@ -32,5 +32,6 @@
 library flutter_futrue;
 
 export 'src/base/base_state.dart';
-export 'src/base/base_view.dart';
 export 'src/helper/rout_helper.dart';
+export 'src/helper/dialog_comm.dart';
+export 'src/helper/comm_widgets.dart';

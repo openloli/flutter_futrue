@@ -1,30 +1,21 @@
-import 'package:flutter/material.dart'
-    hide RefreshIndicator, RefreshIndicatorState;
-import 'package:flutter/scheduler.dart';
-//import 'package:flutter_futrue_example/base_state.dart';
-import 'package:flutter_futrue_example/my/my_pro/my_proqress_view2.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_futrue_example/net/bean/simple_bean.dart';
 import 'package:flutter_futrue_example/net/net.dart';
 import 'package:flutter_futrue_example/page/simple_page1_temp.dart';
-//import 'package:flutter_futrue_example/util/dialog_comm.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter_futrue/flutter_futrue.dart';
 
 ///
-class BarPage3 extends StatefulWidget {
+class SimplePage7 extends StatefulWidget {
   @override
-  _BarPage3State createState() => _BarPage3State();
+  _SimplePage7State createState() => _SimplePage7State();
 }
 
-class _BarPage3State extends BaseState<BarPage3>
-    with AutomaticKeepAliveClientMixin, SingleTickerProviderStateMixin {
+class _SimplePage7State extends BaseState<SimplePage7>
+    with SingleTickerProviderStateMixin {
   var API_date10 = "http://www.mocky.io/v2/5d25615d2f00006400c10754"; //  十条数据
   var API_date3 = "http://www.mocky.io/v2/5d25892f2f00009136c10841"; // 三条数据
   var API_date0 = "http://www.mocky.io/v2/5d2596052f00000a35c108c7"; //数据为空
@@ -47,6 +38,29 @@ class _BarPage3State extends BaseState<BarPage3>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          title: Text('1111111111'),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.redeem),
+              onPressed: () {
+                callInitLoading();
+                onRefresh();
+              },
+            ),
+            IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () {
+                RouteHelper.pushResultWidget(context, new SimplePage1Temp())
+                    .then((result) {
+                  print('result = ${result.toString()}');
+                  callInitLoading();
+                  onRefresh();
+                });
+              },
+            ),
+          ],
+        ),
         body: bodyWidget(
           modelList: modelList,
           onRefresh: onRefresh,
@@ -124,8 +138,4 @@ class _BarPage3State extends BaseState<BarPage3>
       return API_date900;
     } //临时
   }
-
-  @override
-  // TODO: implement wantKeepAlive
-  bool get wantKeepAlive => true;
 }

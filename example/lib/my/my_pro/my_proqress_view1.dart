@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 
-/**
- * Default manually triggered circle
- */
-
-///
-class InitProgressWidget extends StatelessWidget {
+class YourProgress1Widget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Center(
@@ -14,7 +9,7 @@ class InitProgressWidget extends StatelessWidget {
         height: 30.0,
         child: new CircularProgressIndicator(
           strokeWidth: 2.0,
-          backgroundColor: Theme.of(context).primaryColor.withOpacity(0.3),
+          backgroundColor: Colors.yellow,
         ),
       ),
     );

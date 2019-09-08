@@ -28,7 +28,7 @@ class CommonUtils {
                     child: new Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        ProgressView(),
+                        InitProgressWidget(),
                         Text(''),
                         new Container(child: new Text('努力加载中···')),
                       ],
