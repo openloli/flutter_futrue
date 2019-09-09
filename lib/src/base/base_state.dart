@@ -293,8 +293,8 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
         if (result != null) {
           if (isPrint) {
             print('callRefresh result = ${result.toString()}');
-            print('modelList = ${modelList}'); //临时
-            print('model = ${model}'); //临时
+            print('modelList = ${modelList.length}'); //临时
+            print('model = ${model.toString()}'); //临时
           }
           isFirst = false;
           isError = false;
