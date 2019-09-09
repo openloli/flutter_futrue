@@ -1,3 +1,6 @@
+## 1.0.5
+* Major optimization upgrade
+
 ## 1.0.4
 * Add more extension methods for processing data
 * Adapt to Androidx

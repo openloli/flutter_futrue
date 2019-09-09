@@ -1,6 +1,6 @@
 name: flutter_futrue
 description: Use the Flutter + MVC +Refresh plugin to help you quickly develop your Flutter APP
-version: 1.0.3
+version: 1.0.5
 author: pf <133300871@qq.com>
 homepage: https://github.com/android-pf/flutter_futrue
 
@@ -13,7 +13,7 @@ dependencies:
   ######
   connectivity: ^0.4.4
   pull_to_refresh: ^1.5.6
-  cached_network_image: ^1.1.1
+
   ######
 dev_dependencies:
   flutter_test:

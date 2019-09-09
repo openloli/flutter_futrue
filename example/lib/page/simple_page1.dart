@@ -1,17 +1,9 @@
-//import 'package:flutter/material.dart'
-//    hide RefreshIndicator, RefreshIndicatorState;
-//import 'package:flutter/scheduler.dart';
-//import 'package:flutter_futrue_example/base_state.dart';
-//import 'package:flutter_futrue_example/my/my_pro/my_proqress_view2.dart';
 import 'package:flutter_futrue_example/net/bean/simple_bean.dart';
 import 'package:flutter_futrue_example/net/net.dart';
 import 'package:flutter_futrue_example/page/simple_page1_temp.dart';
-//import 'package:pull_to_refresh/pull_to_refresh.dart';
-//import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter_futrue/flutter_futrue.dart';
