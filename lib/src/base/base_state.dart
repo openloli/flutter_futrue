@@ -28,11 +28,12 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
   final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
   final RefreshController refreshController =
       RefreshController(initialRefresh: false);
+
   int pageSize = 10;
   bool isFirst = true, isLoading = false, isError = false, isPrint = false;
-  var tokenInvalidCode = '900',
-      normalCode = '200',
-      noDataCode = '404',
+  var tokenInvalidCode = '900', //登录失效
+      normalCode = '200', //访问成功且有数据
+      noDataCode = '404', //暂无内容
       errorMsg = '暂无内容',
       netClose = '检测到手机没有网络，请打开网络后重试！',
       netWifiLose = '网络差或服务器超时，请稍后重试或使用4G尝试！',
@@ -67,44 +68,16 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
     }
     return Stack(
       children: <Widget>[
-        SmartRefresher(
-          enablePullDown: true,
-          enablePullUp: isLoading,
-          header: WaterDropHeader(),
-          footer: CustomFooter(
-            builder: (BuildContext context, LoadStatus mode) {
-              Widget body;
-              if (mode == LoadStatus.idle) {
-                body = Text("");
-              } else if (mode == LoadStatus.loading) {
-                body = CupertinoActivityIndicator();
-              } else if (mode == LoadStatus.failed) {
-                body = Text("点击重试");
-              } else {
-                body = Text("没有更多数据了");
-              }
-              return Container(
-                height: 55.0,
-                child: Center(child: body),
-              );
-            },
-          ),
-          controller: refreshController,
+        refresherWidget(
           onRefresh: onRefresh,
           onLoading: onLoading,
-          child: isError
-              ? bodyError(model: model, modelList: modelList)
-              : contentBody,
+          contentBody: contentBody,
+          model: model,
+          modelList: modelList,
+          isLoading: isLoading,
+          isError: isError,
         ),
-        //初始转圈扩展
-        new Offstage(
-          offstage: isFirst ? false : true,
-          child: new Container(
-            alignment: Alignment.center,
-            color: Colors.white70,
-            child: InitProgressWidget(),
-          ),
-        ),
+        progressWidget(isFirst),
       ],
     );
   }
@@ -133,44 +106,16 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
         Expanded(
           child: Stack(
             children: <Widget>[
-              SmartRefresher(
-                enablePullDown: true,
-                enablePullUp: isLoading,
-                header: WaterDropHeader(),
-                footer: CustomFooter(
-                  builder: (BuildContext context, LoadStatus mode) {
-                    Widget body;
-                    if (mode == LoadStatus.idle) {
-                      body = Text("");
-                    } else if (mode == LoadStatus.loading) {
-                      body = CupertinoActivityIndicator();
-                    } else if (mode == LoadStatus.failed) {
-                      body = Text("点击重试");
-                    } else {
-                      body = Text("没有更多数据了");
-                    }
-                    return Container(
-                      height: 55.0,
-                      child: Center(child: body),
-                    );
-                  },
-                ),
-                controller: refreshController,
+              refresherWidget(
                 onRefresh: onRefresh,
                 onLoading: onLoading,
-                child: isError
-                    ? bodyError(model: model, modelList: modelList)
-                    : contentBody,
+                contentBody: contentBody,
+                model: model,
+                modelList: modelList,
+                isLoading: isLoading,
+                isError: isError,
               ),
-              //初始转圈扩展
-              new Offstage(
-                offstage: isFirst ? false : true,
-                child: new Container(
-                  alignment: Alignment.center,
-                  color: Colors.white70,
-                  child: InitProgressWidget(),
-                ),
-              ),
+              progressWidget(isFirst),
             ],
           ),
         ),
@@ -179,13 +124,13 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
   }
 
   ///使用刷新组件
-  bodyComplexWidget({
+  bodyBottomWidget({
     BuildContext context,
     Object model,
     List<Object> modelList,
     onRefresh,
     onLoading,
-    headBody,
+    bottomBody,
     contentBody,
   }) {
     if (isPrint) {
@@ -198,52 +143,88 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
     }
     return Column(
       children: <Widget>[
-        headBody,
         Expanded(
           child: Stack(
             children: <Widget>[
-              SmartRefresher(
-                enablePullDown: true,
-                enablePullUp: isLoading,
-                header: WaterDropHeader(),
-                footer: CustomFooter(
-                  builder: (BuildContext context, LoadStatus mode) {
-                    Widget body;
-                    if (mode == LoadStatus.idle) {
-                      body = Text("");
-                    } else if (mode == LoadStatus.loading) {
-                      body = CupertinoActivityIndicator();
-                    } else if (mode == LoadStatus.failed) {
-                      body = Text("点击重试");
-                    } else {
-                      body = Text("没有更多数据了");
-                    }
-                    return Container(
-                      height: 55.0,
-                      child: Center(child: body),
-                    );
-                  },
-                ),
-                controller: refreshController,
+              refresherWidget(
                 onRefresh: onRefresh,
                 onLoading: onLoading,
-                child: isError
-                    ? bodyError(model: model, modelList: modelList)
-                    : contentBody,
+                contentBody: contentBody,
+                model: model,
+                modelList: modelList,
+                isLoading: isLoading,
+                isError: isError,
               ),
-              //初始转圈扩展
-              new Offstage(
-                offstage: isFirst ? false : true,
-                child: new Container(
-                  alignment: Alignment.center,
-                  color: Colors.white70,
-                  child: InitProgressWidget(),
-                ),
-              ),
+              progressWidget(isFirst),
             ],
           ),
         ),
+        bottomBody,
       ],
+    );
+  }
+
+  progressWidget(isFirst) {
+    return new Offstage(
+      offstage: isFirst ? false : true,
+      child: new Container(
+        alignment: Alignment.center,
+        color: Colors.white70,
+        child: initProgressWidget(),
+      ),
+    );
+  }
+
+  refresherWidget({
+    onRefresh,
+    onLoading,
+    contentBody,
+    model,
+    modelList,
+    isLoading,
+    isError,
+  }) {
+    return SmartRefresher(
+      enablePullDown: true,
+      enablePullUp: isLoading,
+      header: WaterDropHeader(),
+      footer: CustomFooter(
+        builder: (BuildContext context, LoadStatus mode) {
+          Widget body;
+          if (mode == LoadStatus.idle) {
+            body = Text("");
+          } else if (mode == LoadStatus.loading) {
+            body = CupertinoActivityIndicator();
+          } else if (mode == LoadStatus.failed) {
+            body = Text("点击重试");
+          } else {
+            body = Text("没有更多数据了");
+          }
+          return Container(
+            height: 55.0,
+            child: Center(child: body),
+          );
+        },
+      ),
+      controller: refreshController,
+      onRefresh: onRefresh,
+      onLoading: onLoading,
+      child:
+          isError ? bodyError(model: model, modelList: modelList) : contentBody,
+    );
+  }
+
+  initProgressWidget() {
+    return InitProgressWidget();
+  }
+
+  initErrorWidget() {
+    return Container(
+      alignment: Alignment.center,
+      width: 200.0,
+      height: 120.0,
+      color: Colors.green[300],
+      child: Text('$errorMsg'),
     );
   }
 
@@ -255,20 +236,13 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
     print('bodyError');
     return Center(
       child: GestureDetector(
-        child: Container(
-          alignment: Alignment.center,
-          width: 200.0,
-          height: 120.0,
-          color: Colors.green[300],
-          child: Text('$errorMsg'),
-        ),
+        child: initErrorWidget(),
         onTap: () {
           if (model == null) {
             modelList.clear();
           } else {
             model = null;
           }
-
           SchedulerBinding.instance.addPostFrameCallback((_) {
             print('bodyError 1');
             refreshController.requestRefresh();

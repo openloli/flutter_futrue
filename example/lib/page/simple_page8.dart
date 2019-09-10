@@ -1,9 +1,19 @@
-import 'package:flutter/material.dart';
+//import 'package:flutter/material.dart'
+//    hide RefreshIndicator, RefreshIndicatorState;
+//import 'package:flutter/scheduler.dart';
+//import 'package:flutter_futrue_example/base_state.dart';
+//import 'package:flutter_futrue_example/my/my_pro/my_proqress_view2.dart';
 import 'package:flutter_futrue_example/net/bean/simple_bean.dart';
 import 'package:flutter_futrue_example/net/net.dart';
 import 'package:flutter_futrue_example/page/simple_page1_temp.dart';
+//import 'package:flutter_futrue_example/util/comm_widgets.dart';
+//import 'package:flutter_futrue_example/util/dialog_comm.dart';
+//import 'package:pull_to_refresh/pull_to_refresh.dart';
+//import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter_futrue/flutter_futrue.dart';
@@ -39,32 +49,31 @@ class _SimplePage8State extends BaseState<SimplePage8>
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('1111111111'),
+          title: Text('底部局'),
           actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.redeem),
-              onPressed: () {
-                callInitLoading();
-                onRefresh();
-              },
-            ),
-            IconButton(
-              icon: Icon(Icons.add),
-              onPressed: () {
-                RouteHelper.pushResultWidget(context, new SimplePage1Temp())
-                    .then((result) {
-                  print('result = ${result.toString()}');
+            appBarMenuText(
+                title: '手刷',
+                onPressed: () {
                   callInitLoading();
                   onRefresh();
-                });
-              },
-            ),
+                }),
+            appBarMenuText(
+                title: '去页面-返刷新',
+                onPressed: () {
+                  RouteHelper.pushResultWidget(context, new SimplePage1Temp())
+                      .then((result) {
+                    print('result = ${result.toString()}');
+                    callInitLoading();
+                    onRefresh();
+                  });
+                }),
           ],
         ),
-        body: bodyWidget(
+        body: bodyBottomWidget(
           modelList: modelList,
           onRefresh: onRefresh,
-//          onLoading: onLoading,
+          onLoading: onLoading,
+          bottomBody: head(),
           contentBody: body(),
         ));
   }
@@ -79,7 +88,7 @@ class _SimplePage8State extends BaseState<SimplePage8>
         ),
         dataCallback: (Object bean) {
           List<dynamic> temp = bean;
-//          temp.length >= 10 ? isLoading = true : isLoading = false;
+          temp.length >= 10 ? isLoading = true : isLoading = false;
           temp.forEach((v) {
             modelList.add(new SimpleDataBean.fromJson(v));
           });
@@ -99,8 +108,8 @@ class _SimplePage8State extends BaseState<SimplePage8>
         ),
         dataCallback: (bean) {
           List<dynamic> temp = bean;
-//          temp.length >= 10 ? isLoading = true : isLoading = false;
-          callLoadingCheck(temp.length);
+          temp.length >= 10 ? isLoading = true : isLoading = false;
+//          callLoadingCheck(temp.length);
           temp.forEach((v) {
             modelList.add(new SimpleDataBean.fromJson(v));
           });
@@ -111,8 +120,18 @@ class _SimplePage8State extends BaseState<SimplePage8>
         });
   }
 
+  head() {
+    return Container(
+      height: 60.0,
+      alignment: Alignment.center,
+      color: Colors.blue,
+      child: Text('我是底部局'),
+    );
+  }
+
   Widget body() {
     return ListView.builder(
+      physics: ClampingScrollPhysics(),
       itemCount: modelList.length,
       itemBuilder: (BuildContext context, int index) {
         return Container(
@@ -126,9 +145,9 @@ class _SimplePage8State extends BaseState<SimplePage8>
 
   ///模拟获取数据时的各种情况
   randomPath(who) {
-    var random = Random().nextInt(5);
+    var random = Random().nextInt(6);
     print('$who，random = ${random} (0、4模拟10条、1模拟3条、2模拟0条、3模拟登录失效)');
-    if (random == 0 || random == 4) {
+    if (random == 0 || random == 4 || random == 5) {
       return API_date10;
     } else if (random == 1) {
       return API_date3;

@@ -63,7 +63,7 @@ class _SimplePage1State extends BaseState<SimplePage1>
           modelList: modelList,
           onRefresh: onRefresh,
           onLoading: onLoading,
-          contentBody: body(),
+          contentBody: onBody(),
         ));
   }
 
@@ -109,7 +109,7 @@ class _SimplePage1State extends BaseState<SimplePage1>
         });
   }
 
-  Widget body() {
+  Widget onBody() {
     return ListView.builder(
       itemCount: modelList.length,
       itemBuilder: (BuildContext context, int index) {
