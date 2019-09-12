@@ -259,7 +259,6 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
     dao,
     dataCallback,
     tokenInvalidCallback,
-    other = false,
   }) async {
     callLoadComplete();
     Future.delayed(const Duration(milliseconds: 2000)).then((val) {
@@ -272,34 +271,32 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
           }
           isFirst = false;
           isError = false;
-          if (other) {
-            dataCallback('1111');
+          if (modelList == null) {
+            model = null;
           } else {
-            if (model == null) {
-              modelList.clear();
-            } else {
-              model = null;
-            }
-            CommBean bean = CommBean.fromJson(result);
-            if (bean.data == null || bean.data == '') {
-              callRefreshFailed();
-            } else {
-              callRefreshCompleted();
-              if (bean.code == normalCode) {
-                if (isPrint) {
-                  print('callRefresh bean.data = ${bean.data}');
-                }
-                dataCallback(bean.data);
-                setState(() {});
-              } else if (bean.code == noDataCode) {
-                callRefreshResultNoData(bean.msg);
-              } else if (bean.code == tokenInvalidCode) {
-                print('是这里弹出的 of bean?');
-                callRefreshResultToken(bean.msg,
-                    tokenInvalidCallback: tokenInvalidCallback);
-              } else {
-                callRefreshOther(bean.msg);
+            modelList.clear();
+          }
+          CommBean bean = CommBean.fromJson(result);
+          if (bean.data == null || bean.data == '') {
+            callRefreshFailed();
+          } else {
+            callRefreshCompleted();
+            if (bean.code == normalCode) {
+              if (isPrint) {
+                print('callRefresh bean.data = ${bean.data}');
               }
+              dataCallback(bean.data);
+              setState(() {});
+            } else if (bean.code == noDataCode) {
+              callRefreshResultNoData(bean.msg);
+            } else if (bean.code == tokenInvalidCode) {
+              if (isPrint) {
+                print('是这里弹出的 of bean?');
+              }
+              callRefreshResultToken(bean.msg,
+                  tokenInvalidCallback: tokenInvalidCallback);
+            } else {
+              callRefreshOther(bean.msg);
             }
           }
         } else {
