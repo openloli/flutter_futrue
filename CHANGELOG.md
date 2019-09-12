@@ -1,4 +1,4 @@
-## 1.0.5
+## 1.0.6
 * happy mid-Autumn Festival!
 * Optimize laps, error pages, head layout, bottom layout performance
 
