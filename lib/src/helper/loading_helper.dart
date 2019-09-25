@@ -7,7 +7,7 @@ import 'package:flutter_futrue/src/proview/proqress_view.dart';
  */
 
 ///
-class CommonUtils {
+class LoadingHelper {
   static Future<Null> showLoadingDialog(BuildContext context) {
     return showDialog(
         context: context,

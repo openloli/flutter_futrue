@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 
+/// route to page
 class RouteHelper {
+  ///Open a new Widget
   static Future<T> pushWidget<T>(
     BuildContext context,
     Widget widget, {
@@ -16,6 +18,7 @@ class RouteHelper {
     );
   }
 
+  ///Open a new Widget(page)
   static Future<T> pushRoute<T>(
     BuildContext context,
     PageRoute<T> route, {
@@ -36,6 +39,7 @@ class RouteHelper {
     return Navigator.push(context, route);
   }
 
+  ///Same as native startActivityForResult(), can carry data when returning after opening a new Widget(page)
   static Future<T> pushResultWidget<T>(
       BuildContext context, Widget widget) async {
     return await Navigator.push(context,

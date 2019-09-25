@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_futrue_example/net/net.dart';
 import 'package:flutter_futrue_example/page/home_page/bottom_bar_home.dart';
 import 'package:flutter_futrue_example/page/home_page/bottom_bar_home2.dart';
 import 'package:flutter_futrue_example/page/home_page/tabbar_paper_home.dart';
 import 'package:flutter_futrue_example/page/home_page/tabbar_paper_home2.dart';
+
 import 'package:flutter_futrue_example/page/simple_page1.dart';
-import 'package:flutter_futrue_example/page/simple_page10.dart';
-import 'package:flutter_futrue_example/page/simple_page11.dart';
-import 'package:flutter_futrue_example/page/simple_page12.dart';
 import 'package:flutter_futrue_example/page/simple_page2.dart';
 import 'package:flutter_futrue_example/page/simple_page3.dart';
 import 'package:flutter_futrue_example/page/simple_page4.dart';
@@ -87,6 +84,8 @@ class _HomePageState extends State<HomePage> {
 
   List<String> dataList = [];
   Map<String, Widget> pageMap = {
+//    '动画': new AnimatioStateRoute(),
+//    'html测试': new SimplePage14(),
     '随机模拟：下拉刷新+加载更多+无数据+服务器异常+登录失效+页面返回+其他按钮触发网络': new SimplePage1(),
     '头布局1-活动头布局': new SimplePage2(),
     '头布局2-固定头布局': new SimplePage3(),

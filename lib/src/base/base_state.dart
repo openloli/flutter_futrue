@@ -331,14 +331,25 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
 
   void callRefreshResultToken(msg, {tokenInvalidCallback}) {
     print('callRefreshResultToken  $msg');
-    callDialog(
-        title: msg,
-        context: context,
-        cancel: false,
+    DialogHelper.defaultDialog(context, title: msg, cancel: false,
         callback: () {
-          Navigator.of(context).pop();
-          tokenInvalidCallback();
-        });
+      Navigator.of(context).pop();
+      tokenInvalidCallback();
+    });
+  }
+
+  void defaultWithTokenInvalid(BuildContext context, Widget page,
+      {msg = '登录已失效请重新登录！！', cleanLoginInfo}) {
+    if (context != null) {
+      DialogHelper.defaultDialog(context, title: msg, cancel: false,
+          callback: () {
+        Navigator.of(context).pop();
+        cleanLoginInfo();
+        RouteHelper.pushWidget(context, page, replaceRoot: true);
+      });
+    } else {
+      print('callRefreshResultToken else ');
+    }
   }
 
   void callRefreshResultNull() {
