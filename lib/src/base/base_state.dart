@@ -252,7 +252,6 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
     Object model,
     List<Object> modelList,
   }) {
-    print('bodyError');
     return Center(
       child: GestureDetector(
         child: Container(
@@ -270,7 +269,6 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
           }
 
           SchedulerBinding.instance.addPostFrameCallback((_) {
-            print('bodyError 1');
             refreshController.requestRefresh();
           });
         },
@@ -320,7 +318,6 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
               } else if (bean.code == noDataCode) {
                 callRefreshResultNoData(bean.msg);
               } else if (bean.code == tokenInvalidCode) {
-                print('是这里弹出的 of bean?');
                 callRefreshResultToken(bean.msg,
                     tokenInvalidCallback: tokenInvalidCallback);
               } else {
@@ -359,7 +356,9 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
   }
 
   void callRefreshResultToken(msg, {tokenInvalidCallback}) {
-    print('callRefreshResultToken  $msg');
+    if (isPrint) {
+      print('callRefreshResultToken  $msg');
+    }
     callDialog(
         title: msg,
         context: context,
