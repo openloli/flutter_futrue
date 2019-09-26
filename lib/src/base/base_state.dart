@@ -359,14 +359,11 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
     if (isPrint) {
       print('callRefreshResultToken  $msg');
     }
-    callDialog(
-        title: msg,
-        context: context,
-        cancel: false,
+    DialogHelper.defaultDialog(context, title: msg, cancel: false,
         callback: () {
-          Navigator.of(context).pop();
-          tokenInvalidCallback();
-        });
+      Navigator.of(context).pop();
+      tokenInvalidCallback();
+    });
   }
 
   void callRefreshResultNull() {
