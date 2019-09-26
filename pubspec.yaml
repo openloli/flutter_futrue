@@ -1,8 +1,9 @@
 name: flutter_futrue
-description: Quickly develop your Flutter app with the flutter_futrue plugin
-version: 1.0.6
+description: For the Flutter (Android, IOS) project, get the data from the entry page, the overall solution for the data normal\abnormal.
+version: 1.0.7
 author: pf <133300871@qq.com>
-homepage: https://github.com/android-pf/flutter_futrue
+homepage: https://github.com/android-pf
+github: https://github.com/android-pf/flutter_futrue
 
 environment:
   sdk: ">=2.1.0 <3.0.0"

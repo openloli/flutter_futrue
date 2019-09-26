@@ -6,6 +6,7 @@
 import 'package:flutter_futrue_example/net/bean/simple_bean.dart';
 import 'package:flutter_futrue_example/net/net.dart';
 import 'package:flutter_futrue_example/page/simple_page1_temp.dart';
+
 //import 'package:pull_to_refresh/pull_to_refresh.dart';
 //import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
@@ -30,6 +31,7 @@ class _SimplePage1State extends BaseState<SimplePage1>
   var API_date900 = "http://www.mocky.io/v2/5d25968c2f00004834c108d1"; //登录失效
   List<SimpleDataBean> modelList = [];
   bool isPrint = true;
+
 //  CancelToken _token = new CancelToken();
   @override
   void initState() {
@@ -49,13 +51,13 @@ class _SimplePage1State extends BaseState<SimplePage1>
         appBar: AppBar(
           title: Text('随机模拟所有情况'),
           actions: <Widget>[
-            appBarMenuText(
+            WidgetHelper.appBarMenuText(
                 title: '手刷',
                 onPressed: () {
                   callInitLoading();
                   onRefresh();
                 }),
-            appBarMenuText(
+            WidgetHelper.appBarMenuText(
                 title: '去页面-返刷新',
                 onPressed: () {
                   RouteHelper.pushResultWidget(context, new SimplePage1Temp())
@@ -78,22 +80,21 @@ class _SimplePage1State extends BaseState<SimplePage1>
   void onRefresh() async {
     var path = randomPath('onRefresh');
     callRefresh(
-        modelList: modelList,
-        dao: HttpManager().get(
-          who: 'path',
-          path: path,
-        ),
-        dataCallback: (Object bean) {
-          List<dynamic> temp = bean;
-          temp.length >= 10 ? isLoading = true : isLoading = false;
-          temp.forEach((v) {
-            modelList.add(new SimpleDataBean.fromJson(v));
-          });
-        },
-        tokenInvalidCallback: () {
-          print('这里是处理登出的逻辑，就退出当前页吧'); //临时
-          Navigator.of(context).pop(); //临时
+      modelList: modelList,
+      dao: HttpManager().get(
+        who: 'path',
+        path: path,
+      ),
+      dataCallback: (Object bean) {
+        List<dynamic> temp = bean;
+        temp.length >= 10 ? isLoading = true : isLoading = false;
+        temp.forEach((v) {
+          modelList.add(new SimpleDataBean.fromJson(v));
         });
+      },
+      tokenInvalidCallback: (msg) =>
+          defaultHandlingTokenInvalid(context, msg: msg),
+    );
   }
 
   void onLoading() async {

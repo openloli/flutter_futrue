@@ -33,6 +33,8 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
   var tokenInvalidCode = '900',
       normalCode = '200',
       noDataCode = '404',
+      loadMoreFailed = '点击重试',
+      loadMoreNoData = '没有更多数据了',
       errorMsg = '暂无内容',
       netClose = '检测到手机没有网络，请打开网络后重试！',
       netWifiLose = '网络差或服务器超时，请稍后重试或使用4G尝试！',
@@ -145,9 +147,9 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
                     } else if (mode == LoadStatus.loading) {
                       body = CupertinoActivityIndicator();
                     } else if (mode == LoadStatus.failed) {
-                      body = Text("点击重试");
+                      body = Text(loadMoreFailed);
                     } else {
-                      body = Text("没有更多数据了");
+                      body = Text(loadMoreNoData);
                     }
                     return Container(
                       height: 55.0,
@@ -214,9 +216,9 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
                     } else if (mode == LoadStatus.loading) {
                       body = CupertinoActivityIndicator();
                     } else if (mode == LoadStatus.failed) {
-                      body = Text("点击重试");
+                      body = Text(loadMoreFailed);
                     } else {
-                      body = Text("没有更多数据了");
+                      body = Text(loadMoreNoData);
                     }
                     return Container(
                       height: 55.0,
@@ -267,7 +269,6 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
           } else {
             model = null;
           }
-
           SchedulerBinding.instance.addPostFrameCallback((_) {
             refreshController.requestRefresh();
           });
@@ -318,8 +319,7 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
               } else if (bean.code == noDataCode) {
                 callRefreshResultNoData(bean.msg);
               } else if (bean.code == tokenInvalidCode) {
-                callRefreshResultToken(bean.msg,
-                    tokenInvalidCallback: tokenInvalidCallback);
+                tokenInvalidCallback(bean.msg);
               } else {
                 callRefreshOther(bean.msg);
               }
@@ -355,15 +355,24 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
     setState(() {});
   }
 
-  void callRefreshResultToken(msg, {tokenInvalidCallback}) {
-    if (isPrint) {
-      print('callRefreshResultToken  $msg');
+  void defaultHandlingTokenInvalid(context,
+      {Widget page, msg = '登录已失效请重新登录！！', cleanLoginInfo}) {
+    if (context != null) {
+      if (page != null) {
+        DialogHelper.defaultDialog(context, title: msg, cancel: false,
+            callback: () {
+          Navigator.of(context).pop();
+          cleanLoginInfo();
+          RouteHelper.pushWidget(context, page, replaceRoot: true);
+        });
+      } else {
+        throw AssertionError(
+            "The defaultHandlingTokenInvalid method must be page (Widget)");
+      }
+    } else {
+      throw AssertionError(
+          "The defaultHandlingTokenInvalid method must be context(not null)!");
     }
-    DialogHelper.defaultDialog(context, title: msg, cancel: false,
-        callback: () {
-      Navigator.of(context).pop();
-      tokenInvalidCallback();
-    });
   }
 
   void callRefreshResultNull() {
@@ -402,8 +411,7 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
             } else if (bean.code == noDataCode) {
               refreshController.loadNoData();
             } else if (bean.code == tokenInvalidCode) {
-              callRefreshResultToken(bean.msg,
-                  tokenInvalidCallback: tokenInvalidCallback);
+              tokenInvalidCallback(bean.msg);
             } else {
               refreshController.loadFailed();
             }

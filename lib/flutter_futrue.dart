@@ -30,13 +30,15 @@
 
 ///
 library flutter_futrue;
-///base
+
+///core
 export 'src/base/base_state.dart';
 export 'package:pull_to_refresh/pull_to_refresh.dart';
+
 ///helper
 export 'src/helper/route_helper.dart';
 export 'src/helper/dialog_helper.dart';
 export 'src/helper/widget_helper.dart';
+
 ///bean
 export 'src/bean/comm_bean.dart';
-
