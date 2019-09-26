@@ -7,7 +7,8 @@
 ***
 针对Flutter(Android、IOS)项目，从进入页面开始获取数据，对数据正常\异常时的整体解决方案。
 
-正式项目:[Android](https://sj.qq.com/myapp/detail.htm?apkName=com.futurenavi.pilot)  | [IOS](https://apps.apple.com/cn/app/id1471076437?l=zh&ls=1&mt=8)
+正式项目:[Android](https://sj.qq.com/myapp/detail.htm?apkName=com.futurenavi.pilot)  、  [IOS](https://apps.apple.com/cn/app/id1471076437?l=zh&ls=1&mt=8)
+
 |Android|IOS
 |-|-
 |![](https://raw.githubusercontent.com/android-pf/flutter_futrue/master/example/assets/qr/android-tea.png)|![](https://github.com/android-pf/flutter_futrue/blob/master/example/assets/qr/ios-tea.png?raw=true)
