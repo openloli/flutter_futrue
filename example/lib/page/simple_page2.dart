@@ -6,6 +6,7 @@
 import 'package:flutter_futrue_example/net/bean/simple_bean.dart';
 import 'package:flutter_futrue_example/net/net.dart';
 import 'package:flutter_futrue_example/page/simple_page1_temp.dart';
+//import 'package:flutter_futrue_example/util/dialog_comm.dart';
 //import 'package:pull_to_refresh/pull_to_refresh.dart';
 //import 'package:connectivity/connectivity.dart';
 import 'package:flutter/cupertino.dart';
@@ -17,12 +18,12 @@ import 'dart:math';
 import 'package:flutter_futrue/flutter_futrue.dart';
 
 ///
-class SimplePage1 extends StatefulWidget {
+class SimplePage2 extends StatefulWidget {
   @override
-  _SimplePage1State createState() => _SimplePage1State();
+  _SimplePage2State createState() => _SimplePage2State();
 }
 
-class _SimplePage1State extends BaseState<SimplePage1>
+class _SimplePage2State extends BaseState<SimplePage2>
     with SingleTickerProviderStateMixin {
   var API_date10 = "http://www.mocky.io/v2/5d25615d2f00006400c10754"; //  十条数据
   var API_date3 = "http://www.mocky.io/v2/5d25892f2f00009136c10841"; // 三条数据
@@ -30,7 +31,7 @@ class _SimplePage1State extends BaseState<SimplePage1>
   var API_date900 = "http://www.mocky.io/v2/5d25968c2f00004834c108d1"; //登录失效
   List<SimpleDataBean> modelList = [];
   bool isPrint = true;
-//  CancelToken _token = new CancelToken();
+
   @override
   void initState() {
     onRefresh();
@@ -47,24 +48,26 @@ class _SimplePage1State extends BaseState<SimplePage1>
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('随机模拟所有情况'),
+          title: Text('跟随滑动的头布局'),
           actions: <Widget>[
-            appBarMenuText(
-                title: '手刷',
-                onPressed: () {
+            IconButton(
+              icon: Icon(Icons.redeem),
+              onPressed: () {
+                callInitLoading();
+                onRefresh();
+              },
+            ),
+            IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () {
+                RouteHelper.pushResultWidget(context, new SimplePage1Temp())
+                    .then((result) {
+                  print('result = ${result.toString()}');
                   callInitLoading();
                   onRefresh();
-                }),
-            appBarMenuText(
-                title: '去页面-返刷新',
-                onPressed: () {
-                  RouteHelper.pushResultWidget(context, new SimplePage1Temp())
-                      .then((result) {
-                    print('result = ${result.toString()}');
-                    callInitLoading();
-                    onRefresh();
-                  });
-                }),
+                });
+              },
+            ),
           ],
         ),
         body: bodyWidget(
@@ -119,13 +122,28 @@ class _SimplePage1State extends BaseState<SimplePage1>
 
   Widget body() {
     return ListView.builder(
-      itemCount: modelList.length,
+      itemCount: modelList.length + 1,
       itemBuilder: (BuildContext context, int index) {
-        return Container(
-          alignment: Alignment.center,
-          height: 80.0,
-          child: Text('${modelList[index].name}'),
-        );
+        if (index == 0) {
+          if (modelList.length > 0) {
+            return Container(
+              alignment: Alignment.center,
+              color: Colors.blue,
+              height: 120.0,
+              child: Text('我是头布局'),
+            );
+          } else {
+            return Container(
+              height: 0.0,
+            );
+          }
+        } else {
+          return Container(
+            alignment: Alignment.center,
+            height: 80.0,
+            child: Text('${modelList[index - 1].name}'),
+          );
+        }
       },
     );
   }
@@ -134,7 +152,7 @@ class _SimplePage1State extends BaseState<SimplePage1>
   randomPath(who) {
     var random = Random().nextInt(6);
     print('$who，random = ${random} (0、4模拟10条、1模拟3条、2模拟0条、3模拟登录失效)');
-    if (random == 0 || random == 4 || random == 5) {
+    if (random == 0 || random == 4|| random == 5) {
       return API_date10;
     } else if (random == 1) {
       return API_date3;

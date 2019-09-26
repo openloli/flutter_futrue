@@ -1,20 +1,22 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'
+    hide RefreshIndicator, RefreshIndicatorState;
 import 'package:flutter_futrue_example/net/bean/simple_bean.dart';
 import 'package:flutter_futrue_example/net/net.dart';
 import 'package:flutter_futrue_example/page/simple_page1_temp.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'dart:math';
 
 import 'package:flutter_futrue/flutter_futrue.dart';
 
 ///
-class SimplePage8 extends StatefulWidget {
+class SimplePage11 extends StatefulWidget {
   @override
-  _SimplePage8State createState() => _SimplePage8State();
+  _SimplePage11State createState() => _SimplePage11State();
 }
 
-class _SimplePage8State extends BaseState<SimplePage8>
+class _SimplePage11State extends BaseState<SimplePage11>
     with SingleTickerProviderStateMixin {
   var API_date10 = "http://www.mocky.io/v2/5d25615d2f00006400c10754"; //  十条数据
   var API_date3 = "http://www.mocky.io/v2/5d25892f2f00009136c10841"; // 三条数据

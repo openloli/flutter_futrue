@@ -1,9 +1,8 @@
-import 'package:flutter_futrue_example/base_state.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_futrue_example/net/bean/simple_bean.dart';
 import 'package:flutter_futrue_example/net/net.dart';
 import 'package:flutter_futrue_example/page/simple_page1_temp.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'dart:math';
 
@@ -15,7 +14,7 @@ class SimplePage7 extends StatefulWidget {
   _SimplePage7State createState() => _SimplePage7State();
 }
 
-class _SimplePage7State extends LHBaseState<SimplePage7>
+class _SimplePage7State extends BaseState<SimplePage7>
     with SingleTickerProviderStateMixin {
   var API_date10 = "http://www.mocky.io/v2/5d25615d2f00006400c10754"; //  十条数据
   var API_date3 = "http://www.mocky.io/v2/5d25892f2f00009136c10841"; // 三条数据
@@ -23,7 +22,7 @@ class _SimplePage7State extends LHBaseState<SimplePage7>
   var API_date900 = "http://www.mocky.io/v2/5d25968c2f00004834c108d1"; //登录失效
   List<SimpleDataBean> modelList = [];
   bool isPrint = true;
-//  CancelToken _token = new CancelToken();
+
   @override
   void initState() {
     onRefresh();
@@ -40,30 +39,32 @@ class _SimplePage7State extends LHBaseState<SimplePage7>
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('随机模拟所有情况'),
+          title: Text('1111111111'),
           actions: <Widget>[
-            WidgetHelper.  appBarMenuText(
-                title: '手刷',
-                onPressed: () {
+            IconButton(
+              icon: Icon(Icons.redeem),
+              onPressed: () {
+                callInitLoading();
+                onRefresh();
+              },
+            ),
+            IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () {
+                RouteHelper.pushResultWidget(context, new SimplePage1Temp())
+                    .then((result) {
+                  print('result = ${result.toString()}');
                   callInitLoading();
                   onRefresh();
-                }),
-            WidgetHelper.  appBarMenuText(
-                title: '去页面-返刷新',
-                onPressed: () {
-                  RouteHelper.pushResultWidget(context, new SimplePage1Temp())
-                      .then((result) {
-                    print('result = ${result.toString()}');
-                    callInitLoading();
-                    onRefresh();
-                  });
-                }),
+                });
+              },
+            ),
           ],
         ),
         body: bodyWidget(
           modelList: modelList,
           onRefresh: onRefresh,
-          onLoading: onLoading,
+//          onLoading: onLoading,
           contentBody: body(),
         ));
   }
@@ -78,7 +79,7 @@ class _SimplePage7State extends LHBaseState<SimplePage7>
         ),
         dataCallback: (Object bean) {
           List<dynamic> temp = bean;
-          temp.length >= 10 ? isLoading = true : isLoading = false;
+//          temp.length >= 10 ? isLoading = true : isLoading = false;
           temp.forEach((v) {
             modelList.add(new SimpleDataBean.fromJson(v));
           });
@@ -98,8 +99,8 @@ class _SimplePage7State extends LHBaseState<SimplePage7>
         ),
         dataCallback: (bean) {
           List<dynamic> temp = bean;
-          temp.length >= 10 ? isLoading = true : isLoading = false;
-//          callLoadingCheck(temp.length);
+//          temp.length >= 10 ? isLoading = true : isLoading = false;
+          callLoadingCheck(temp.length);
           temp.forEach((v) {
             modelList.add(new SimpleDataBean.fromJson(v));
           });
@@ -125,13 +126,13 @@ class _SimplePage7State extends LHBaseState<SimplePage7>
 
   ///模拟获取数据时的各种情况
   randomPath(who) {
-    var random = Random().nextInt(6);
+    var random = Random().nextInt(5);
     print('$who，random = ${random} (0、4模拟10条、1模拟3条、2模拟0条、3模拟登录失效)');
-    if (random == 0 || random == 4 ) {
+    if (random == 0 || random == 4) {
       return API_date10;
     } else if (random == 1) {
       return API_date3;
-    } else if (random == 2|| random == 5) {
+    } else if (random == 2) {
       return API_date0;
     } else if (random == 3) {
       return API_date900;

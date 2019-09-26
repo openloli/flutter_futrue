@@ -51,13 +51,13 @@ class _SimplePage5State extends BaseState<SimplePage5>
         appBar: AppBar(
           title: Text('随机模拟所有情况'),
           actions: <Widget>[
-            WidgetHelper.   appBarMenuText(
+            appBarMenuText(
                 title: '手刷',
                 onPressed: () {
                   callInitLoading();
                   onRefresh();
                 }),
-            WidgetHelper. appBarMenuText(
+            appBarMenuText(
                 title: '去页面-返刷新',
                 onPressed: () {
                   RouteHelper.pushResultWidget(context, new SimplePage1Temp())

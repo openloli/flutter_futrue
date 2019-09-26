@@ -51,13 +51,13 @@ class _SimplePage3State extends BaseState<SimplePage3>
         appBar: AppBar(
           title: Text('固定头布局'),
           actions: <Widget>[
-            WidgetHelper.  appBarMenuText(
+            appBarMenuText(
                 title: '手刷',
                 onPressed: () {
                   callInitLoading();
                   onRefresh();
                 }),
-            WidgetHelper.  appBarMenuText(
+            appBarMenuText(
                 title: '去页面-返刷新',
                 onPressed: () {
                   RouteHelper.pushResultWidget(context, new SimplePage1Temp())

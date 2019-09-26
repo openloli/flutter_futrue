@@ -28,12 +28,11 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
   final GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
   final RefreshController refreshController =
       RefreshController(initialRefresh: false);
-
   int pageSize = 10;
   bool isFirst = true, isLoading = false, isError = false, isPrint = false;
-  var tokenInvalidCode = '900', //登录失效
-      normalCode = '200', //访问成功且有数据
-      noDataCode = '404', //暂无内容
+  var tokenInvalidCode = '900',
+      normalCode = '200',
+      noDataCode = '404',
       errorMsg = '暂无内容',
       netClose = '检测到手机没有网络，请打开网络后重试！',
       netWifiLose = '网络差或服务器超时，请稍后重试或使用4G尝试！',
@@ -68,16 +67,44 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
     }
     return Stack(
       children: <Widget>[
-        refresherWidget(
+        SmartRefresher(
+          enablePullDown: true,
+          enablePullUp: isLoading,
+          header: WaterDropHeader(),
+          footer: CustomFooter(
+            builder: (BuildContext context, LoadStatus mode) {
+              Widget body;
+              if (mode == LoadStatus.idle) {
+                body = Text("");
+              } else if (mode == LoadStatus.loading) {
+                body = CupertinoActivityIndicator();
+              } else if (mode == LoadStatus.failed) {
+                body = Text("点击重试");
+              } else {
+                body = Text("没有更多数据了");
+              }
+              return Container(
+                height: 55.0,
+                child: Center(child: body),
+              );
+            },
+          ),
+          controller: refreshController,
           onRefresh: onRefresh,
           onLoading: onLoading,
-          contentBody: contentBody,
-          model: model,
-          modelList: modelList,
-          isLoading: isLoading,
-          isError: isError,
+          child: isError
+              ? bodyError(model: model, modelList: modelList)
+              : contentBody,
         ),
-        progressWidget(isFirst),
+        //初始转圈扩展
+        new Offstage(
+          offstage: isFirst ? false : true,
+          child: new Container(
+            alignment: Alignment.center,
+            color: Colors.white70,
+            child: InitProgressWidget(),
+          ),
+        ),
       ],
     );
   }
@@ -106,16 +133,44 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
         Expanded(
           child: Stack(
             children: <Widget>[
-              refresherWidget(
+              SmartRefresher(
+                enablePullDown: true,
+                enablePullUp: isLoading,
+                header: WaterDropHeader(),
+                footer: CustomFooter(
+                  builder: (BuildContext context, LoadStatus mode) {
+                    Widget body;
+                    if (mode == LoadStatus.idle) {
+                      body = Text("");
+                    } else if (mode == LoadStatus.loading) {
+                      body = CupertinoActivityIndicator();
+                    } else if (mode == LoadStatus.failed) {
+                      body = Text("点击重试");
+                    } else {
+                      body = Text("没有更多数据了");
+                    }
+                    return Container(
+                      height: 55.0,
+                      child: Center(child: body),
+                    );
+                  },
+                ),
+                controller: refreshController,
                 onRefresh: onRefresh,
                 onLoading: onLoading,
-                contentBody: contentBody,
-                model: model,
-                modelList: modelList,
-                isLoading: isLoading,
-                isError: isError,
+                child: isError
+                    ? bodyError(model: model, modelList: modelList)
+                    : contentBody,
               ),
-              progressWidget(isFirst),
+              //初始转圈扩展
+              new Offstage(
+                offstage: isFirst ? false : true,
+                child: new Container(
+                  alignment: Alignment.center,
+                  color: Colors.white70,
+                  child: InitProgressWidget(),
+                ),
+              ),
             ],
           ),
         ),
@@ -124,13 +179,13 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
   }
 
   ///使用刷新组件
-  bodyBottomWidget({
+  bodyComplexWidget({
     BuildContext context,
     Object model,
     List<Object> modelList,
     onRefresh,
     onLoading,
-    bottomBody,
+    headBody,
     contentBody,
   }) {
     if (isPrint) {
@@ -143,88 +198,52 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
     }
     return Column(
       children: <Widget>[
+        headBody,
         Expanded(
           child: Stack(
             children: <Widget>[
-              refresherWidget(
+              SmartRefresher(
+                enablePullDown: true,
+                enablePullUp: isLoading,
+                header: WaterDropHeader(),
+                footer: CustomFooter(
+                  builder: (BuildContext context, LoadStatus mode) {
+                    Widget body;
+                    if (mode == LoadStatus.idle) {
+                      body = Text("");
+                    } else if (mode == LoadStatus.loading) {
+                      body = CupertinoActivityIndicator();
+                    } else if (mode == LoadStatus.failed) {
+                      body = Text("点击重试");
+                    } else {
+                      body = Text("没有更多数据了");
+                    }
+                    return Container(
+                      height: 55.0,
+                      child: Center(child: body),
+                    );
+                  },
+                ),
+                controller: refreshController,
                 onRefresh: onRefresh,
                 onLoading: onLoading,
-                contentBody: contentBody,
-                model: model,
-                modelList: modelList,
-                isLoading: isLoading,
-                isError: isError,
+                child: isError
+                    ? bodyError(model: model, modelList: modelList)
+                    : contentBody,
               ),
-              progressWidget(isFirst),
+              //初始转圈扩展
+              new Offstage(
+                offstage: isFirst ? false : true,
+                child: new Container(
+                  alignment: Alignment.center,
+                  color: Colors.white70,
+                  child: InitProgressWidget(),
+                ),
+              ),
             ],
           ),
         ),
-        bottomBody,
       ],
-    );
-  }
-
-  progressWidget(isFirst) {
-    return new Offstage(
-      offstage: isFirst ? false : true,
-      child: new Container(
-        alignment: Alignment.center,
-        color: Colors.white70,
-        child: initProgressWidget(),
-      ),
-    );
-  }
-
-  refresherWidget({
-    onRefresh,
-    onLoading,
-    contentBody,
-    model,
-    modelList,
-    isLoading,
-    isError,
-  }) {
-    return SmartRefresher(
-      enablePullDown: true,
-      enablePullUp: isLoading,
-      header: WaterDropHeader(),
-      footer: CustomFooter(
-        builder: (BuildContext context, LoadStatus mode) {
-          Widget body;
-          if (mode == LoadStatus.idle) {
-            body = Text("");
-          } else if (mode == LoadStatus.loading) {
-            body = CupertinoActivityIndicator();
-          } else if (mode == LoadStatus.failed) {
-            body = Text("点击重试");
-          } else {
-            body = Text("没有更多数据了");
-          }
-          return Container(
-            height: 55.0,
-            child: Center(child: body),
-          );
-        },
-      ),
-      controller: refreshController,
-      onRefresh: onRefresh,
-      onLoading: onLoading,
-      child:
-          isError ? bodyError(model: model, modelList: modelList) : contentBody,
-    );
-  }
-
-  initProgressWidget() {
-    return InitProgressWidget();
-  }
-
-  initErrorWidget() {
-    return Container(
-      alignment: Alignment.center,
-      width: 200.0,
-      height: 120.0,
-      color: Colors.green[300],
-      child: Text('$errorMsg'),
     );
   }
 
@@ -233,18 +252,23 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
     Object model,
     List<Object> modelList,
   }) {
-    print('bodyError');
     return Center(
       child: GestureDetector(
-        child: initErrorWidget(),
+        child: Container(
+          alignment: Alignment.center,
+          width: 200.0,
+          height: 120.0,
+          color: Colors.green[300],
+          child: Text('$errorMsg'),
+        ),
         onTap: () {
           if (model == null) {
             modelList.clear();
           } else {
             model = null;
           }
+
           SchedulerBinding.instance.addPostFrameCallback((_) {
-            print('bodyError 1');
             refreshController.requestRefresh();
           });
         },
@@ -259,6 +283,7 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
     dao,
     dataCallback,
     tokenInvalidCallback,
+    other = false,
   }) async {
     callLoadComplete();
     Future.delayed(const Duration(milliseconds: 2000)).then((val) {
@@ -266,37 +291,38 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
         if (result != null) {
           if (isPrint) {
             print('callRefresh result = ${result.toString()}');
-            print('modelList = ${modelList.length}'); //临时
-            print('model = ${model.toString()}'); //临时
+            print('modelList = ${modelList}'); //临时
+            print('model = ${model}'); //临时
           }
           isFirst = false;
           isError = false;
-          if (modelList == null) {
-            model = null;
+          if (other) {
+            dataCallback('1111');
           } else {
-            modelList.clear();
-          }
-          CommBean bean = CommBean.fromJson(result);
-          if (bean.data == null || bean.data == '') {
-            callRefreshFailed();
-          } else {
-            callRefreshCompleted();
-            if (bean.code == normalCode) {
-              if (isPrint) {
-                print('callRefresh bean.data = ${bean.data}');
-              }
-              dataCallback(bean.data);
-              setState(() {});
-            } else if (bean.code == noDataCode) {
-              callRefreshResultNoData(bean.msg);
-            } else if (bean.code == tokenInvalidCode) {
-              if (isPrint) {
-                print('是这里弹出的 of bean?');
-              }
-              callRefreshResultToken(bean.msg,
-                  tokenInvalidCallback: tokenInvalidCallback);
+            if (model == null) {
+              modelList.clear();
             } else {
-              callRefreshOther(bean.msg);
+              model = null;
+            }
+            CommBean bean = CommBean.fromJson(result);
+            if (bean.data == null || bean.data == '') {
+              callRefreshFailed();
+            } else {
+              callRefreshCompleted();
+              if (bean.code == normalCode) {
+                if (isPrint) {
+                  print('callRefresh bean.data = ${bean.data}');
+                }
+                dataCallback(bean.data);
+                setState(() {});
+              } else if (bean.code == noDataCode) {
+                callRefreshResultNoData(bean.msg);
+              } else if (bean.code == tokenInvalidCode) {
+                callRefreshResultToken(bean.msg,
+                    tokenInvalidCallback: tokenInvalidCallback);
+              } else {
+                callRefreshOther(bean.msg);
+              }
             }
           }
         } else {
@@ -330,26 +356,17 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
   }
 
   void callRefreshResultToken(msg, {tokenInvalidCallback}) {
-    print('callRefreshResultToken  $msg');
-    DialogHelper.defaultDialog(context, title: msg, cancel: false,
-        callback: () {
-      Navigator.of(context).pop();
-      tokenInvalidCallback();
-    });
-  }
-
-  void defaultWithTokenInvalid(BuildContext context, Widget page,
-      {msg = '登录已失效请重新登录！！', cleanLoginInfo}) {
-    if (context != null) {
-      DialogHelper.defaultDialog(context, title: msg, cancel: false,
-          callback: () {
-        Navigator.of(context).pop();
-        cleanLoginInfo();
-        RouteHelper.pushWidget(context, page, replaceRoot: true);
-      });
-    } else {
-      print('callRefreshResultToken else ');
+    if (isPrint) {
+      print('callRefreshResultToken  $msg');
     }
+    callDialog(
+        title: msg,
+        context: context,
+        cancel: false,
+        callback: () {
+          Navigator.of(context).pop();
+          tokenInvalidCallback();
+        });
   }
 
   void callRefreshResultNull() {
