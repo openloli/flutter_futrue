@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_futrue_example/page/bat_page/bar_page1.dart';
-import 'package:flutter_futrue_example/page/bat_page/bar_page2.dart';
-import 'package:flutter_futrue_example/page/bat_page/bar_page3.dart';
-
 import 'package:flutter_futrue_example/page/bat_page/bar_page4.dart';
 import 'package:flutter_futrue_example/page/bat_page/bar_page5.dart';
 import 'package:flutter_futrue_example/page/bat_page/bar_page6.dart';
@@ -14,7 +10,6 @@ class BottomBarHomePage2 extends StatefulWidget {
 
 class _BottomBarHomePage2State extends State<BottomBarHomePage2>
     with SingleTickerProviderStateMixin {
-
   TabController _tabController;
 
   void _onBottomNavigationBarTap(int index) {
@@ -22,7 +17,6 @@ class _BottomBarHomePage2State extends State<BottomBarHomePage2>
       _tabController.index = index;
     });
   }
-
 
   @override
   void initState() {
@@ -45,14 +39,12 @@ class _BottomBarHomePage2State extends State<BottomBarHomePage2>
       ),
       body: TabBarView(
         controller: _tabController,
-        children: <Widget>[new BarPage4(), new BarPage5(),new BarPage6() ],
+        children: <Widget>[new BarPage4(), new BarPage5(), new BarPage6()],
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _tabController.index,
         type: BottomNavigationBarType.fixed,
-        fixedColor: Theme
-            .of(context)
-            .primaryColor,
+        fixedColor: Theme.of(context).primaryColor,
         onTap: _onBottomNavigationBarTap,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -74,6 +66,4 @@ class _BottomBarHomePage2State extends State<BottomBarHomePage2>
       ),
     );
   }
-
-
 }

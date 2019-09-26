@@ -5,17 +5,15 @@ class MyHeader1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 60.0,
-      width: MediaQuery
-          .of(context)
-          .size
-          .width,
+      width: MediaQuery.of(context).size.width,
       child: Container(
         alignment: Alignment.center,
         width: 30.0,
         height: 30.0,
         child: Image.asset(
           "assets/images/loading.gif",
-          fit: BoxFit.fill,),
+          fit: BoxFit.fill,
+        ),
       ),
     );
   }

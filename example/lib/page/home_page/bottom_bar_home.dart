@@ -3,7 +3,6 @@ import 'package:flutter_futrue_example/page/bat_page/bar_page1.dart';
 import 'package:flutter_futrue_example/page/bat_page/bar_page2.dart';
 import 'package:flutter_futrue_example/page/bat_page/bar_page3.dart';
 
-
 class BottomBarHomePage extends StatefulWidget {
   @override
   _BottomBarHomePageState createState() => _BottomBarHomePageState();
@@ -11,7 +10,6 @@ class BottomBarHomePage extends StatefulWidget {
 
 class _BottomBarHomePageState extends State<BottomBarHomePage>
     with SingleTickerProviderStateMixin {
-
   TabController _tabController;
 
   void _onBottomNavigationBarTap(int index) {
@@ -19,7 +17,6 @@ class _BottomBarHomePageState extends State<BottomBarHomePage>
       _tabController.index = index;
     });
   }
-
 
   @override
   void initState() {
@@ -42,14 +39,12 @@ class _BottomBarHomePageState extends State<BottomBarHomePage>
       ),
       body: TabBarView(
         controller: _tabController,
-        children: <Widget>[new BarPage1(), new BarPage2(),new BarPage3() ],
+        children: <Widget>[new BarPage1(), new BarPage2(), new BarPage3()],
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _tabController.index,
         type: BottomNavigationBarType.fixed,
-        fixedColor: Theme
-            .of(context)
-            .primaryColor,
+        fixedColor: Theme.of(context).primaryColor,
         onTap: _onBottomNavigationBarTap,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(

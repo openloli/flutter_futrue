@@ -8,11 +8,10 @@ class HttpManager {
   static const CONTENT_TYPE_data = "text/html; charset=UTF-8";
   static const CONTENT_TYPE_data2 = "data-form";
   static Dio _dio;
-  static final int CONNECR_TIME_OUT = 20000;
-  static final int RECIVE_TIME_OUT = 20000;
-  static Map<String, CancelToken> _cancelTokens;
+  static const CONNECR_TIME_OUT = 20000;
+  static const RECIVE_TIME_OUT = 20000;
 
-
+  ///static Map<String, CancelToken> _cancelTokens;
   ///配置dio
   initDio({var yourIntercept, yourPEM, yourProxy}) {
     if (_dio == null) {
@@ -23,8 +22,7 @@ class HttpManager {
       ///代理设置
       if (yourProxy != null && yourProxy != '') {
         (_dio.httpClientAdapter as DefaultHttpClientAdapter)
-            .onHttpClientCreate =
-            (client) {
+            .onHttpClientCreate = (client) {
           // config the http client
           client.findProxy = (uri) {
             //proxy all request to localhost:8888
@@ -41,8 +39,9 @@ class HttpManager {
             .onHttpClientCreate = (client) {
           client.badCertificateCallback =
               (X509Certificate cert, String host, int port) {
-            print('证书 cert.pem = ${cert.pem},, = PEM = ${yourPEM}');
-            if (cert.pem == yourPEM) { // Verify the certificate
+            print('证书 cert.pem = ${cert.pem},, = PEM = $yourPEM');
+            if (cert.pem == yourPEM) {
+              // Verify the certificate
 
               return true;
             }
@@ -98,6 +97,4 @@ class HttpManager {
       return null;
     }
   }
-
-
 }

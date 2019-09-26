@@ -6,17 +6,11 @@ import 'package:flutter_futrue_example/page/home_page/bottom_bar_home2.dart';
 import 'package:flutter_futrue_example/page/home_page/tabbar_paper_home.dart';
 import 'package:flutter_futrue_example/page/home_page/tabbar_paper_home2.dart';
 import 'package:flutter_futrue_example/page/simple_page1.dart';
-import 'package:flutter_futrue_example/page/simple_page10.dart';
-import 'package:flutter_futrue_example/page/simple_page11.dart';
-import 'package:flutter_futrue_example/page/simple_page12.dart';
 import 'package:flutter_futrue_example/page/simple_page2.dart';
 import 'package:flutter_futrue_example/page/simple_page3.dart';
 import 'package:flutter_futrue_example/page/simple_page4.dart';
 import 'package:flutter_futrue_example/page/simple_page5.dart';
 import 'package:flutter_futrue_example/page/simple_page6.dart';
-import 'package:flutter_futrue_example/page/simple_page7.dart';
-import 'package:flutter_futrue_example/page/simple_page8.dart';
-import 'package:flutter_futrue_example/page/simple_page9.dart';
 import 'package:flutter_futrue/flutter_futrue.dart';
 
 class HomePage extends StatefulWidget {
