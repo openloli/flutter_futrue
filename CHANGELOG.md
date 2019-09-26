@@ -1,6 +1,6 @@
 ## 1.0.7
-* happy mid-Autumn Festival!
-* Optimize laps, error pages, head layout, bottom layout performance
+* ptimize the use of TabView, if the page is not sliding in order (the first page directly into the third page), and the login failure, the BuildContext is empty
+* Added helper class, providing common routing function, routing function with return parameters, text button in the upper right corner of AppBar, etc.
 
 ## 1.0.6
 * happy mid-Autumn Festival!

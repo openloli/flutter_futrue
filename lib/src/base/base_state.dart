@@ -317,8 +317,11 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
                 dataCallback(bean.data);
                 setState(() {});
               } else if (bean.code == noDataCode) {
+
                 callRefreshResultNoData(bean.msg);
               } else if (bean.code == tokenInvalidCode) {
+                print('1111   callRefresh bean.msg = ${bean.msg}');
+                callRefreshFailed();
                 tokenInvalidCallback(bean.msg);
               } else {
                 callRefreshOther(bean.msg);
@@ -356,19 +359,17 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
   }
 
   void defaultHandlingTokenInvalid(context,
-      {Widget page, msg = '登录已失效请重新登录！！', cleanLoginInfo}) {
+      {Widget page, msg = '登录已失效请重新登录！！'}) {
     if (context != null) {
-      if (page != null) {
-        DialogHelper.defaultDialog(context, title: msg, cancel: false,
-            callback: () {
-          Navigator.of(context).pop();
-          cleanLoginInfo();
-          RouteHelper.pushWidget(context, page, replaceRoot: true);
-        });
-      } else {
-        throw AssertionError(
-            "The defaultHandlingTokenInvalid method must be page (Widget)");
-      }
+      DialogHelper.defaultDialog(context, title: msg, cancel: false,
+          callback: () {
+            Navigator.of(context).pop();
+            if (page != null) {
+              RouteHelper.pushWidget(context, page, replaceRoot: true);
+            }else{
+              setState(() {});
+            }
+          });
     } else {
       throw AssertionError(
           "The defaultHandlingTokenInvalid method must be context(not null)!");

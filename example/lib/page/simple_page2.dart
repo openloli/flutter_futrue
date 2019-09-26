@@ -96,7 +96,8 @@ class _SimplePage2State extends BaseState<SimplePage2>
         tokenInvalidCallback: () {
           print('这里是处理登出的逻辑，就退出当前页吧'); //临时
           Navigator.of(context).pop(); //临时
-        });
+        },
+    );
   }
 
   void onLoading() async {

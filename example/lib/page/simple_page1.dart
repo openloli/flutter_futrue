@@ -48,33 +48,34 @@ class _SimplePage1State extends BaseState<SimplePage1>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('随机模拟所有情况'),
-          actions: <Widget>[
-            WidgetHelper.appBarMenuText(
-                title: '手刷',
-                onPressed: () {
+      appBar: AppBar(
+        title: Text('随机模拟所有情况'),
+        actions: <Widget>[
+          WidgetHelper.appBarMenuText(
+              title: '手刷',
+              onPressed: () {
+                callInitLoading();
+                onRefresh();
+              }),
+          WidgetHelper.appBarMenuText(
+              title: '去页面-返刷新',
+              onPressed: () {
+                RouteHelper.pushResultWidget(context, new SimplePage1Temp())
+                    .then((result) {
+                  print('result = ${result.toString()}');
                   callInitLoading();
                   onRefresh();
-                }),
-            WidgetHelper.appBarMenuText(
-                title: '去页面-返刷新',
-                onPressed: () {
-                  RouteHelper.pushResultWidget(context, new SimplePage1Temp())
-                      .then((result) {
-                    print('result = ${result.toString()}');
-                    callInitLoading();
-                    onRefresh();
-                  });
-                }),
-          ],
-        ),
-        body: bodyWidget(
-          modelList: modelList,
-          onRefresh: onRefresh,
-          onLoading: onLoading,
-          contentBody: body(),
-        ));
+                });
+              }),
+        ],
+      ),
+      body: bodyWidget(
+        modelList: modelList,
+        onRefresh: onRefresh,
+        onLoading: onLoading,
+        contentBody: body(),
+      ),
+    );
   }
 
   void onRefresh() async {
@@ -94,28 +95,36 @@ class _SimplePage1State extends BaseState<SimplePage1>
       },
       tokenInvalidCallback: (msg) =>
           defaultHandlingTokenInvalid(context, msg: msg),
+//        tokenInvalidCallback: () {
+//          print('这里是处理登出的逻辑，就退出当前页吧'); //临时
+//          Navigator.of(context).pop(); //临时
+////          defaultHandlingTokenInvalid(context, msg: msg);
+//        },
     );
   }
 
   void onLoading() async {
     var path = randomPath('onLoading');
     callLoading(
-        dao: HttpManager().get(
-          who: path,
-          path: path,
-        ),
-        dataCallback: (bean) {
-          List<dynamic> temp = bean;
-          temp.length >= 10 ? isLoading = true : isLoading = false;
+      dao: HttpManager().get(
+        who: path,
+        path: path,
+      ),
+      dataCallback: (bean) {
+        List<dynamic> temp = bean;
+        temp.length >= 10 ? isLoading = true : isLoading = false;
 //          callLoadingCheck(temp.length);
-          temp.forEach((v) {
-            modelList.add(new SimpleDataBean.fromJson(v));
-          });
-        },
-        tokenInvalidCallback: () {
-          print('这里是处理登出的逻辑，就退出当前页吧'); //临时
-          Navigator.of(context).pop(); //临时
+        temp.forEach((v) {
+          modelList.add(new SimpleDataBean.fromJson(v));
         });
+      },
+      tokenInvalidCallback: (msg) =>
+          defaultHandlingTokenInvalid(context, msg: msg),
+//        tokenInvalidCallback: (msg) {
+//          print('这里是处理登出的逻辑，就退出当前页吧'); //临时
+//          Navigator.of(context).pop(); //临时
+//        },
+    );
   }
 
   Widget body() {
@@ -135,13 +144,13 @@ class _SimplePage1State extends BaseState<SimplePage1>
   randomPath(who) {
     var random = Random().nextInt(6);
     print('$who，random = ${random} (0、4模拟10条、1模拟3条、2模拟0条、3模拟登录失效)');
-    if (random == 0 || random == 4 || random == 5) {
+    if (random == 0) {
       return API_date10;
     } else if (random == 1) {
       return API_date3;
     } else if (random == 2) {
       return API_date0;
-    } else if (random == 3) {
+    } else if (random == 3 || random == 4 || random == 5) {
       return API_date900;
     } //临时
   }
