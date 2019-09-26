@@ -24,10 +24,9 @@
 - 上拉加载更多数据。
  ***
 #### 效果图
-| 截图1：模式无内容、无网络 |  截图2：模拟返回页面时的情况
+| 模式无内容、无网络 |  模拟返回页面时的情况
 |-|-
-| ![flutter_futrue_1.gif](https://upload-images.jianshu.io/upload_images/2819106-230c732f73bf4d73.gif?imageMogr2/auto-orient/strip)|![flutter_futrue_2.gif](https://upload-images.jianshu.io/upload_images/2819106-0a03f4e79f2698fa.gif?imageMogr2/auto-orient/strip)
-|
+| ![flutter_futrue_1.gif](https://upload-images.jianshu.io/upload_images/2819106-230c732f73bf4d73.gif?imageMogr2/auto-orient/strip)|![flutter_futrue_2.gif](https://upload-images.jianshu.io/upload_images/2819106-0a03f4e79f2698fa.gif?imageMogr2/auto-orient/strip)|
 ***
 ## 使用
 1. 添加依赖

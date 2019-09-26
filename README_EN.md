@@ -9,7 +9,7 @@ For the Flutter (Android, IOS) project, get the data from the entry page, the ov
 
 Formal project:
 Download link| [Android](https://sj.qq.com/myapp/detail.htm?apkName=com.futurenavi.pilot) |[IOS](https://apps.apple.com/cn/app/id1471076437?l=zh&ls=1&mt=8)
-:---:|:---:|:---:
+|-|-
 QR code|![](https://raw.githubusercontent.com/android-pf/flutter_futrue/master/example/assets/qr/android-tea.png)|![](https://github.com/android-pf/flutter_futrue/blob/master/example/assets/qr/ios-tea.png?raw=true)
 
 ***
@@ -26,8 +26,7 @@ QR code|![](https://raw.githubusercontent.com/android-pf/flutter_futrue/master/e
 #### Rendering
 | Mode no content, no network |  Simulate the situation when returning to the page
 |-|-
-| ![flutter_futrue_1.gif](https://upload-images.jianshu.io/upload_images/2819106-230c732f73bf4d73.gif?imageMogr2/auto-orient/strip)|![flutter_futrue_2.gif](https://upload-images.jianshu.io/upload_images/2819106-0a03f4e79f2698fa.gif?imageMogr2/auto-orient/strip)
-|
+| ![](https://upload-images.jianshu.io/upload_images/2819106-230c732f73bf4d73.gif?imageMogr2/auto-orient/strip)|![](https://upload-images.jianshu.io/upload_images/2819106-0a03f4e79f2698fa.gif?imageMogr2/auto-orient/strip)|
 ***
 ## use
 1. Add dependency
