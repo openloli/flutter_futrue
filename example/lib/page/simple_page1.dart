@@ -35,27 +35,7 @@ class _SimplePage1State extends BaseState<SimplePage1>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('随机模拟所有情况'),
-        actions: <Widget>[
-          WidgetHelper.appBarMenuText(
-              title: '手刷',
-              onPressed: () {
-                callInitLoading();
-                onRefresh();
-              }),
-          WidgetHelper.appBarMenuText(
-              title: '去页面-返刷新',
-              onPressed: () {
-                RouteHelper.pushResultWidget(context, new SimplePage1Temp())
-                    .then((result) {
-                  print('result = ${result.toString()}');
-                  callInitLoading();
-                  onRefresh();
-                });
-              }),
-        ],
-      ),
+      appBar: appBarAndActions(),
       body: bodyWidget(
         modelList: modelList,
         onRefresh: onRefresh,
@@ -123,6 +103,30 @@ class _SimplePage1State extends BaseState<SimplePage1>
           child: Text('${modelList[index].name}'),
         );
       },
+    );
+  }
+
+  Widget appBarAndActions() {
+    return AppBar(
+      title: Text('随机模拟所有情况'),
+      actions: <Widget>[
+        WidgetHelper.appBarMenuText(
+            title: '手刷',
+            onPressed: () {
+              callInitLoading();
+              onRefresh();
+            }),
+        WidgetHelper.appBarMenuText(
+            title: '去页面-返刷新',
+            onPressed: () {
+              RouteHelper.pushResultWidget(context, new SimplePage1Temp())
+                  .then((result) {
+                print('result = ${result.toString()}');
+                callInitLoading();
+                onRefresh();
+              });
+            }),
+      ],
     );
   }
 }

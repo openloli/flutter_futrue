@@ -32,23 +32,23 @@ Formal project:   [Android](https://sj.qq.com/myapp/detail.htm?apkName=com.futur
 ## use
 1. Add dependency
 
-```
+```dart
 dependencies:
   flutter_futrue: latest_version
 ```
 2. import
-```
+```dart
 import 'package:flutter_futrue/flutter_futrue.dart';
 ```
 3. Replace the current page extends State with extends BaseState (or your xxBaseState)
-```
+```dart
 ...
 //class _YourPageName extends State<YourPageName>{...}
 class _YourPageName extends BaseState<YourPageName>{...}
 ...
 ```
 4. Use bodyWidget in build
-```
+```dart
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,7 +64,7 @@ class _YourPageName extends BaseState<YourPageName>{...}
 ...
 ```
 5. onRefresh(onLoading) gets the encapsulation of the data
-```
+```dart
   void onRefresh() async {
     callRefresh(
       modelList: modelList,

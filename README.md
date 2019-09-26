@@ -32,23 +32,23 @@
 ## 使用
 1. 添加依赖
 
-```
+```dart
 dependencies:
   flutter_futrue: latest_version
 ```
 2. 引入
-```
+```dart
 import 'package:flutter_futrue/flutter_futrue.dart';
 ```
 3. 替换当前页面extends State更改为extends  BaseState
-```
+```dart
 ...
 //class _YourPageName extends State<YourPageName>{...}
 class _YourPageName extends BaseState<YourPageName>{...}
 ...
 ```
 4. 在build中的使用
-```
+```dart
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,7 +64,7 @@ class _YourPageName extends BaseState<YourPageName>{...}
 ...
 ```
 5. onRefresh（onLoading）获取数据的封装
-```
+```dart
   void onRefresh() async {
     callRefresh(
       modelList: modelList,
@@ -88,7 +88,7 @@ class _YourPageName extends BaseState<YourPageName>{...}
 
 ### 传送门
 - [github地址](https://github.com/android-pf/flutter_futrue)
-- [插件默认的JSON格式是什么样的，其他格式的数据如何定制BaseState？](https://github.com/android-pf/flutter_futrue/blob/master/example/README.md)
+- [插件默认的JSON格式是什么样的，其他格式的数据如何定制BaseState？](https://github.com/android-pf/flutter_futrue/blob/master/example/README_WIDGET.md)
 - [如何定制默认转圈？如何定制错误页面](https://github.com/android-pf/flutter_futrue/blob/master/example/README_PROBLEM.md)
 - [常见问题](https://github.com/android-pf/flutter_futrue/blob/master/example/README_WIDGET.md)
 

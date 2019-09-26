@@ -315,9 +315,8 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
                   print('callRefresh bean.data = ${bean.data}');
                 }
                 dataCallback(bean.data);
-                setState(() {});
+//                setState(() {});
               } else if (bean.code == noDataCode) {
-
                 callRefreshResultNoData(bean.msg);
               } else if (bean.code == tokenInvalidCode) {
                 print('1111   callRefresh bean.msg = ${bean.msg}');
@@ -363,13 +362,13 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
     if (context != null) {
       DialogHelper.defaultDialog(context, title: msg, cancel: false,
           callback: () {
-            Navigator.of(context).pop();
-            if (page != null) {
-              RouteHelper.pushWidget(context, page, replaceRoot: true);
-            }else{
-              setState(() {});
-            }
-          });
+        Navigator.of(context).pop();
+        if (page != null) {
+          RouteHelper.pushWidget(context, page, replaceRoot: true);
+        } else {
+          setState(() {});
+        }
+      });
     } else {
       throw AssertionError(
           "The defaultHandlingTokenInvalid method must be context(not null)!");
@@ -408,7 +407,7 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
                 print('callLoading bean.data = ${bean.data}');
               }
               dataCallback(bean.data);
-              setState(() {});
+//              setState(() {});
             } else if (bean.code == noDataCode) {
               refreshController.loadNoData();
             } else if (bean.code == tokenInvalidCode) {
