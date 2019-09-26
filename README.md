@@ -7,10 +7,10 @@
 ***
 针对Flutter(Android、IOS)项目，从进入页面开始获取数据，对数据正常\异常时的整体解决方案。
 
-正式项目:
-|下载链接| [Android](https://sj.qq.com/myapp/detail.htm?apkName=com.futurenavi.pilot) |[IOS](https://apps.apple.com/cn/app/id1471076437?l=zh&ls=1&mt=8)
-|-|-|-
-|二维码|![](https://raw.githubusercontent.com/android-pf/flutter_futrue/master/example/assets/qr/android-tea.png)|![](https://github.com/android-pf/flutter_futrue/blob/master/example/assets/qr/ios-tea.png?raw=true)
+正式项目:[Android](https://sj.qq.com/myapp/detail.htm?apkName=com.futurenavi.pilot)  | [IOS](https://apps.apple.com/cn/app/id1471076437?l=zh&ls=1&mt=8)
+|Android|IOS
+|-|-
+|![](https://raw.githubusercontent.com/android-pf/flutter_futrue/master/example/assets/qr/android-tea.png)|![](https://github.com/android-pf/flutter_futrue/blob/master/example/assets/qr/ios-tea.png?raw=true)
 
 ***
 **flutter_futrue 特点**
@@ -26,7 +26,7 @@
 #### 效果图
 | 模式无内容、无网络 |  模拟返回页面时的情况
 |-|-
-| ![flutter_futrue_1.gif](https://upload-images.jianshu.io/upload_images/2819106-230c732f73bf4d73.gif?imageMogr2/auto-orient/strip)|![flutter_futrue_2.gif](https://upload-images.jianshu.io/upload_images/2819106-0a03f4e79f2698fa.gif?imageMogr2/auto-orient/strip)|
+| ![](https://upload-images.jianshu.io/upload_images/2819106-230c732f73bf4d73.gif?imageMogr2/auto-orient/strip)|![](https://upload-images.jianshu.io/upload_images/2819106-0a03f4e79f2698fa.gif?imageMogr2/auto-orient/strip)|
 ***
 ## 使用
 1. 添加依赖
