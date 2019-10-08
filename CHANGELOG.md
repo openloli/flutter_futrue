@@ -1,3 +1,6 @@
+## 1.0.8
+* Remove the base data in the base base class and execute the setState after the callback, avoiding some of the page combination with the TabView error setState() called after dispose()
+
 ## 1.0.7
 * ptimize the use of TabView, if the page is not sliding in order (the first page directly into the third page), and the login failure, the BuildContext is empty
 * Added helper class, providing common routing function, routing function with return parameters, text button in the upper right corner of AppBar, etc.

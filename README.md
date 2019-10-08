@@ -6,9 +6,13 @@
 ### [Flutter Futrue](https://pub.dev/packages/flutter_futrue)
 
 针对Flutter(Android、IOS)项目，从进入页面开始获取数据，对数据正常\异常时的整体解决方案。
+![使用flutter_futrue前后对比.png](https://upload-images.jianshu.io/upload_images/2819106-254af4e58fc8331b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-正式项目:  [Android](https://sj.qq.com/myapp/detail.htm?apkName=com.futurenavi.pilot)  、  [IOS](https://apps.apple.com/cn/app/id1471076437?l=zh&ls=1&mt=8)
+从上图中可发现 [flutter_futrue](https://pub.dev/packages/flutter_futrue)**就是`把你打开页面、访问网络数据后的一些列事情及情况都进行了封装`，只需要去做对应数据处理（ListView 画 Item）、数据异常后的对应数据（自带重新功能）、登录失效的处理以及对应的接口API的封装**。相对来说减轻了开发量及页面代码。
+
 ***
+正式项目:  [Android](https://sj.qq.com/myapp/detail.htm?apkName=com.futurenavi.pilot)  、  [IOS](https://apps.apple.com/cn/app/id1471076437?l=zh&ls=1&mt=8)
+
 |Android|IOS
 |-|-
 |![](https://raw.githubusercontent.com/android-pf/flutter_futrue/master/example/assets/qr/android-tea.png)|![](https://github.com/android-pf/flutter_futrue/blob/master/example/assets/qr/ios-tea.png?raw=true)
@@ -24,7 +28,7 @@
 - 下拉刷新数据。
 - 上拉加载更多数据。
  ***
-#### 效果图
+#### 刷新效果图
 | 模式无内容、无网络 |  模拟返回页面时的情况
 |-|-
 | ![](https://upload-images.jianshu.io/upload_images/2819106-230c732f73bf4d73.gif?imageMogr2/auto-orient/strip)|![](https://upload-images.jianshu.io/upload_images/2819106-0a03f4e79f2698fa.gif?imageMogr2/auto-orient/strip)|
@@ -93,6 +97,6 @@ class _YourPageName extends BaseState<YourPageName>{...}
 - [常见问题](https://github.com/android-pf/flutter_futrue/blob/master/example/README_WIDGET.md)
 
 
->联系方式
+##### 联系方式
 我的FlutterQQ群：10788108
 Flutter专栏QQ群：497219582

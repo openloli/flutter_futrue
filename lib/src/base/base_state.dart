@@ -11,17 +11,14 @@ import 'dart:async';
 import 'package:flutter/scheduler.dart';
 import 'package:connectivity/connectivity.dart';
 
-/**
- * Core class
- * Use polymorphism and overloading
- * Encapsulate common page styles
- * Package refresh plugin
- * Package data processing
- * Package turn effect
- * Adapt the title, floating window in the upper right corner, etc.
- */
+/// Core class
+/// Use polymorphism and overloading
+/// Encapsulate common page styles
+/// Package refresh plugin
+/// Package data processing
+/// Package turn effect
+/// Adapt the title, floating window in the upper right corner, etc.
 
-///
 enum DataState { normal, noData, noNetwork, catched }
 
 abstract class BaseState<T extends StatefulWidget> extends State<T> {
@@ -315,7 +312,6 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
                   print('callRefresh bean.data = ${bean.data}');
                 }
                 dataCallback(bean.data);
-//                setState(() {});
               } else if (bean.code == noDataCode) {
                 callRefreshResultNoData(bean.msg);
               } else if (bean.code == tokenInvalidCode) {
@@ -407,7 +403,6 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
                 print('callLoading bean.data = ${bean.data}');
               }
               dataCallback(bean.data);
-//              setState(() {});
             } else if (bean.code == noDataCode) {
               refreshController.loadNoData();
             } else if (bean.code == tokenInvalidCode) {

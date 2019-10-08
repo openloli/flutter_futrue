@@ -7,8 +7,13 @@ Language ： [中文](https://github.com/android-pf/flutter_futrue/blob/master/R
 
 For the Flutter (Android, IOS) project, get the data from the entry page, the overall solution for the data normal\abnormal.
 
+![before and after using flutter_futrue](https://upload-images.jianshu.io/upload_images/2819106-254af4e58fc8331b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+From the above figure, you can find [flutter_futrue](https://pub.dev/packages/flutter_futrue)** is to `encapsulate some of the things and situations after you open the page and access the network data. Corresponding data processing (ListView drawing Item), corresponding data after data anomaly (with self-reloading function), processing of login failure, and encapsulation of corresponding interface API**. Relatively reduced development and page code.
+
+
 Formal project:   [Android](https://sj.qq.com/myapp/detail.htm?apkName=com.futurenavi.pilot) 、[IOS](https://apps.apple.com/cn/app/id1471076437?l=zh&ls=1&mt=8)
-***
+
 |Android|IOS
 |-|-
 |![](https://raw.githubusercontent.com/android-pf/flutter_futrue/master/example/assets/qr/android-tea.png)|![](https://github.com/android-pf/flutter_futrue/blob/master/example/assets/qr/ios-tea.png?raw=true)
@@ -94,6 +99,6 @@ In this way, let the development division of labor in the interface access \ tes
 - [common problem](https://github.com/android-pf/flutter_futrue/blob/master/example/README_WIDGET.md)
 
 
->Contact information
+#### Contact information
 My Flutter QQ group: 10788108
 Flutter column QQ group: 497219582
