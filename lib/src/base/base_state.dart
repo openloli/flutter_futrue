@@ -1,12 +1,11 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_futrue/flutter_futrue.dart';
-import 'package:flutter_futrue/src/bean/comm_bean.dart';
 import 'package:flutter_futrue/src/proview/proqress_view.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-
+import 'package:flutter_futrue/src/bean/comm_bean.dart';
 import 'package:flutter/widgets.dart';
-import 'dart:async';
 
 import 'package:flutter/scheduler.dart';
 import 'package:connectivity/connectivity.dart';
@@ -101,7 +100,7 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
           child: new Container(
             alignment: Alignment.center,
             color: Colors.white70,
-            child: InitProgressWidget(),
+            child: initProgressWidget(),
           ),
         ),
       ],
@@ -236,7 +235,7 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
                 child: new Container(
                   alignment: Alignment.center,
                   color: Colors.white70,
-                  child: InitProgressWidget(),
+                  child: initProgressWidget(),
                 ),
               ),
             ],
@@ -416,6 +415,20 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
         }
       });
     });
+  }
+
+  initProgressWidget() {
+    return InitProgressWidget();
+  }
+
+  initErrorWidget() {
+    return Container(
+      alignment: Alignment.center,
+      width: 200.0,
+      height: 120.0,
+      color: Colors.green[300],
+      child: Text('$errorMsg'),
+    );
   }
 
   ///使用网络异常情况分析器
