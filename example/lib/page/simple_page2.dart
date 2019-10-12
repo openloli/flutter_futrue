@@ -1,3 +1,4 @@
+import 'package:flutter_futrue_example/base_state.dart';
 import 'package:flutter_futrue_example/net/bean/simple_bean.dart';
 import 'package:flutter_futrue_example/net/net.dart';
 import 'package:flutter_futrue_example/page/simple_page1_temp.dart';
@@ -14,7 +15,7 @@ class SimplePage2 extends StatefulWidget {
   _SimplePage2State createState() => _SimplePage2State();
 }
 
-class _SimplePage2State extends BaseState<SimplePage2>
+class _SimplePage2State extends LHBaseState<SimplePage2>
     with SingleTickerProviderStateMixin {
   List<SimpleDataBean> modelList = [];
   bool isPrint = true;
@@ -78,7 +79,7 @@ class _SimplePage2State extends BaseState<SimplePage2>
         temp.length >= 10 ? isLoading = true : isLoading = false;
         temp.forEach((v) {
           modelList.add(new SimpleDataBean.fromJson(v));
-        });
+        });     setState(() {});
       },
       tokenInvalidCallback: () {
         print('这里是处理登出的逻辑，就退出当前页吧'); //临时
@@ -100,7 +101,7 @@ class _SimplePage2State extends BaseState<SimplePage2>
 //          callLoadingCheck(temp.length);
           temp.forEach((v) {
             modelList.add(new SimpleDataBean.fromJson(v));
-          });
+          });     setState(() {});
         },
         tokenInvalidCallback: () {
           print('这里是处理登出的逻辑，就退出当前页吧'); //临时

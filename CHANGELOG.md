@@ -1,3 +1,6 @@
+## 1.0.9
+* Fixed an issue where the previous version of the custom circle and the error page could not be used
+
 ## 1.0.8
 * Remove the base data in the base base class and execute the setState after the callback, avoiding some of the page combination with the TabView error setState() called after dispose()
 

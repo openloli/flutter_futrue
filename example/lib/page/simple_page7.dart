@@ -78,7 +78,7 @@ class _SimplePage7State extends BaseState<SimplePage7>
 //          temp.length >= 10 ? isLoading = true : isLoading = false;
           temp.forEach((v) {
             modelList.add(new SimpleDataBean.fromJson(v));
-          });
+          });     setState(() {});
         },
         tokenInvalidCallback: () {
           print('这里是处理登出的逻辑，就退出当前页吧'); //临时
@@ -99,7 +99,7 @@ class _SimplePage7State extends BaseState<SimplePage7>
           callLoadingCheck(temp.length);
           temp.forEach((v) {
             modelList.add(new SimpleDataBean.fromJson(v));
-          });
+          });     setState(() {});
         },
         tokenInvalidCallback: () {
           print('这里是处理登出的逻辑，就退出当前页吧'); //临时

@@ -58,7 +58,7 @@ class _SimplePage1State extends BaseState<SimplePage1>
         temp.length >= 10 ? isLoading = true : isLoading = false;
         temp.forEach((v) {
           modelList.add(new SimpleDataBean.fromJson(v));
-        });
+        });     setState(() {});
       },
       tokenInvalidCallback: (msg) =>
           defaultHandlingTokenInvalid(context, msg: msg),
@@ -83,6 +83,7 @@ class _SimplePage1State extends BaseState<SimplePage1>
         temp.forEach((v) {
           modelList.add(new SimpleDataBean.fromJson(v));
         });
+        setState(() {});
       },
       tokenInvalidCallback: (msg) =>
           defaultHandlingTokenInvalid(context, msg: msg),
