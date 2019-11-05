@@ -1,9 +1,5 @@
 import 'dart:math';
-
-import 'package:flutter_futrue_example/net/api.dart';
 import 'package:flutter_futrue_example/net/bean/simple_bean.dart';
-import 'package:flutter_futrue_example/net/net.dart';
-import 'package:flutter_futrue_example/page/simple_page1_temp.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -28,7 +24,7 @@ class _SimplePage14State extends BaseState<SimplePage14>
   @override
   void initState() {
     editingController = new TextEditingController();
-    _list = CalendarViewModel().getItemList();
+//    _list = CalendarViewModel().getItemList();
     currentDay = (Random().nextInt(27)) + 1;
     itemList2 = CalendarViewModel().getItemList3(currentDay);
     super.initState();
@@ -209,7 +205,7 @@ class _SimplePage14State extends BaseState<SimplePage14>
     );
   }
 
-  List<CalendarItemViewModel> _list = [];
+//  List<CalendarItemViewModel> _list = [];
   int currentDay = 1;
 
   tempWidget() {
@@ -276,7 +272,7 @@ class _SimplePage14State extends BaseState<SimplePage14>
 //        setState(() {});
 //      }
     }).catchError((err) {
-      print('日期选择 err ${err}');
+      print('日期选择 err $err');
     });
   }
 }

@@ -100,7 +100,7 @@ class TimeUtil {
     int currentMonthDays = getDaysInMonth(year, month);
     // 每个月前面空出来的天数
     int placeholderDays = numberOfHeadPlaceholderForMonth(year, month, localizations);
-    int rows = (currentMonthDays + placeholderDays)~/7; // 向下取整
+//    int rows = (currentMonthDays + placeholderDays)~/7; // 向下取整
     int remainder = (currentMonthDays + placeholderDays)%7; // 取余（最后一行的天数）
     if (remainder > 0) {
       count = 7-remainder;
