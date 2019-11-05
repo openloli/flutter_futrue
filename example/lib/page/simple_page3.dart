@@ -1,3 +1,4 @@
+import 'package:flutter_futrue_example/base_state.dart';
 import 'package:flutter_futrue_example/net/bean/simple_bean.dart';
 import 'package:flutter_futrue_example/net/net.dart';
 import 'package:flutter_futrue_example/page/simple_page1_temp.dart';
@@ -14,10 +15,9 @@ class SimplePage3 extends StatefulWidget {
   _SimplePage3State createState() => _SimplePage3State();
 }
 
-class _SimplePage3State extends BaseState<SimplePage3>
+class _SimplePage3State extends LHBaseState<SimplePage3>
     with SingleTickerProviderStateMixin {
   List<SimpleDataBean> modelList = [];
-  bool isPrint = true;
 
   @override
   void initState() {
@@ -95,7 +95,6 @@ class _SimplePage3State extends BaseState<SimplePage3>
         dataCallback: (bean) {
           List<dynamic> temp = bean;
           temp.length >= 10 ? isLoading = true : isLoading = false;
-//          callLoadingCheck(temp.length);
           temp.forEach((v) {
             modelList.add(new SimpleDataBean.fromJson(v));
           });     setState(() {});

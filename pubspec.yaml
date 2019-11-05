@@ -1,9 +1,9 @@
 name: flutter_futrue
 description: For the Flutter (Android, IOS) project, get the data from the entry page, the overall solution for the data normal\abnormal.
-version: 1.0.9
+version: 1.1.0
 author: pf <133300871@qq.com>
-homepage: https://www.jianshu.com/u/277313c1d2a4
 github: https://github.com/android-pf/flutter_futrue
+homepage: https://www.jianshu.com/u/277313c1d2a4
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -12,8 +12,8 @@ dependencies:
   flutter:
     sdk: flutter
   ######
-  connectivity: ^0.4.4
-  pull_to_refresh: ^1.5.6
+  connectivity: ^0.4.5+2
+  pull_to_refresh: ^1.5.7
 
   ######
 dev_dependencies:

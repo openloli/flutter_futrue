@@ -14,7 +14,7 @@ class Api {
   static randomPath(who) {
     var random = Random().nextInt(5);
     print('$who，random = $random (0、4模拟10条、1模拟3条、2模拟0条、3模拟登录失效)');
-    if (random == 0 || random == 4) {
+    if (random == 0 || random == 1|| random == 2|| random == 3|| random == 4) {
       return Api.apiData10;
     } else if (random == 1) {
       return Api.apiData3;

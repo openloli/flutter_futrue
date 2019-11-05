@@ -6,6 +6,7 @@ import 'package:flutter_futrue_example/page/home_page/bottom_bar_home2.dart';
 import 'package:flutter_futrue_example/page/home_page/tabbar_paper_home.dart';
 import 'package:flutter_futrue_example/page/home_page/tabbar_paper_home2.dart';
 import 'package:flutter_futrue_example/page/simple_page1.dart';
+import 'package:flutter_futrue_example/page/simple_page14.dart';
 import 'package:flutter_futrue_example/page/simple_page2.dart';
 import 'package:flutter_futrue_example/page/simple_page3.dart';
 import 'package:flutter_futrue_example/page/simple_page4.dart';
@@ -92,6 +93,7 @@ class _HomePageState extends State<HomePage> {
     '底部页面情况2（BottomNavigationBar）': new BottomBarHomePage2(),
     '顶部页面情况1（TabBarView）': new TabBarHomePage(),
     '顶部页面情况2（TabBarView,不重复加载）': new TabBarHomePage2(),
+    '搜索框测试': new SimplePage14(),
 
 //    'Gank API': new SimplePage3(),
 //    '自定义异常情况+随机数据获取': new SimplePage4(),

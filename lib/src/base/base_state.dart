@@ -25,7 +25,11 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
   final RefreshController refreshController =
       RefreshController(initialRefresh: false);
   int pageSize = 10;
-  bool isFirst = true, isLoading = false, isError = false, isPrint = false;
+  bool isFirst = true,
+      isRefresh = true,
+      isLoading = false,
+      isError = false,
+      isPrint = false;
   var tokenInvalidCode = '900',
       normalCode = '200',
       noDataCode = '404',
@@ -66,7 +70,7 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
     return Stack(
       children: <Widget>[
         SmartRefresher(
-          enablePullDown: true,
+          enablePullDown: isRefresh,
           enablePullUp: isLoading,
           header: WaterDropHeader(),
           footer: CustomFooter(
@@ -125,14 +129,14 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
     if (onLoading == null) {
       isLoading = false;
     }
-    return Column(
+    return Stack(
       children: <Widget>[
-        headBody,
-        Expanded(
-          child: Stack(
-            children: <Widget>[
-              SmartRefresher(
-                enablePullDown: true,
+        Column(
+          children: <Widget>[
+            headBody,
+            Expanded(
+              child: SmartRefresher(
+                enablePullDown: isRefresh,
                 enablePullUp: isLoading,
                 header: WaterDropHeader(),
                 footer: CustomFooter(
@@ -160,16 +164,15 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
                     ? bodyError(model: model, modelList: modelList)
                     : contentBody,
               ),
-              //初始转圈扩展
-              new Offstage(
-                offstage: isFirst ? false : true,
-                child: new Container(
-                  alignment: Alignment.center,
-                  color: Colors.white70,
-                  child: InitProgressWidget(),
-                ),
-              ),
-            ],
+            ),
+          ],
+        ),
+        Offstage(
+          offstage: isFirst ? false : true,
+          child: new Container(
+            alignment: Alignment.center,
+            color: Colors.white70,
+            child: initProgressWidget(),
           ),
         ),
       ],
@@ -201,7 +204,7 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
           child: Stack(
             children: <Widget>[
               SmartRefresher(
-                enablePullDown: true,
+                enablePullDown: isRefresh,
                 enablePullUp: isLoading,
                 header: WaterDropHeader(),
                 footer: CustomFooter(
@@ -260,7 +263,7 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
           child: Text('$errorMsg'),
         ),
         onTap: () {
-          if (model == null) {
+          if (model == null || modelList != null) {
             modelList.clear();
           } else {
             model = null;
@@ -288,7 +291,7 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
         if (result != null) {
           if (isPrint) {
             print('callRefresh result = ${result.toString()}');
-            print('modelList = $modelList'); //临时
+            print('modelList = ${modelList == null ? '' : modelList}'); //临时
             print('model = $model'); //临时
           }
           isFirst = false;
@@ -296,7 +299,7 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
           if (other) {
             dataCallback('1111');
           } else {
-            if (model == null) {
+            if (model == null || modelList != null) {
               modelList.clear();
             } else {
               model = null;

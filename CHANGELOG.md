@@ -1,3 +1,9 @@
+## 1.1.0
+* Fixed an issue where extended loops failed when there was a head layout
+* Logic when optimizing non-data type data result sets
+* Optimized support for drop-down refresh
+* Added universal search widget
+
 ## 1.0.9
 * Fixed an issue where the previous version of the custom circle and the error page could not be used
 
