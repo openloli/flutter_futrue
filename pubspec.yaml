@@ -15,13 +15,20 @@ dependencies:
   connectivity: ^0.4.5+2
   pull_to_refresh: ^1.5.7
 
-  ######
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
 
+# The following section is specific to Flutter.
 flutter:
+  # This section identifies this Flutter project as a plugin project.
+  # The androidPackage and pluginClass identifiers should not ordinarily
+  # be modified. They are used by the tooling to maintain consistency when
+  # adding or updating assets for this project.
   plugin:
     androidPackage: com.futurenavi.flutter_futrue
     pluginClass: FlutterFutruePlugin
+
